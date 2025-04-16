@@ -1,0 +1,61 @@
+.product-container {
+    padding-block-end: 36px;
+}
+
+.product-container .grid-list {
+    position: relative;
+}
+
+.product-container .title-wrapper {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: 16px;
+}
+
+.section[data-product-grid-section] {
+    margin-block: 32px;
+}
+
+.section[data-product-grid-section] .product-main {
+    margin-bottom: 30px;
+}
+
+.section[data-product-grid-section] .product-main .title {
+    letter-spacing: 0.4px;
+    text-transform: capitalize;
+    padding-bottom: 10px;
+    border-bottom: 1px solid hsl(0, 0%, 93%);
+    margin-bottom: 30px;
+}
+
+.section[data-product-grid-section] .product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.section[data-product-grid-section] .product-grid .showcase {
+    position: relative;
+    border: 1px solid hsl(0, 0%, 93%);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    transition: var(--transition-timing);
+}
+
+.section[data-product-grid-section] .product-grid .showcase-banner {
+    position: relative;
+    aspect-ratio: 4 / 5;
+}
+
+.section[data-product-grid-section] .product-grid .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-timing);
+}
+
+.section[data-product-grid-section] .product-grid .showcase:hover .product-img {
+    transform: scale(1.1);
+}

@@ -1,0 +1,69 @@
+.btn {
+    height: 40px;
+    max-width: max-content;
+    padding-inline: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--radius-4);
+    transition: var(--transition-short);
+}
+
+.btn .material-symbols-outlined {
+    font-size: 1.8rem;
+}
+
+.btn.has-icon {
+    padding-inline-start: 16px;
+}
+
+/* primary button */
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:where(:hover, :focus-visible):not(:active) {
+    background-color: var(--primary-hover);
+}
+
+/* secondary button */
+.btn-secondary {
+    background-color: var(--image-background);
+}
+
+/* ws button */
+.btn-ws {
+    background-color: var(--ws-green-1);
+    color: var(--white-1);
+}
+
+.btn-ws:where(:hover, :focus-visible):not(:active, :disabled) {
+    background-color: var(--ws-green-2);
+}
+
+/* badge button */
+.header .btn-badge {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: var(--fs-label-small);
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 50px;
+}
+
+/* filter button */
+.btn-filter {
+    padding-inline: 12px;
+}
+
+.btn-filter .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

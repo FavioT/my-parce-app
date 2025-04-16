@@ -1,0 +1,35 @@
+/*
+|--------------------------------------------------------------------------
+| HEADER
+|--------------------------------------------------------------------------
+*/
+
+.header .btn-primary,
+.navbar {
+    display: none;
+}
+
+.header {
+    background-color: var(--background);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-inline: 16px;
+    border-block-end: 1px solid var(--outline);
+    z-index: 4;
+}
+
+.mis-a {
+    margin-inline-start: auto;
+}
+
+.logo .logo-light,
+.logo .logo-dark {
+    max-width: 110px;
+    width: 100%;
+}

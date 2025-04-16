@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Vanilla App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="header" data-header>
+      <a href="/" class="logo">
+          <!-- <img src="./assets/images/logo-light.webp" width="280" height="48" alt="Herrajes Oeste" class="logo-light" title="Herrajes Oeste"> -->
+      </a>
+      
+      <nav class="navbar" data-navbar-desktop="" data-item-active="Inicio">
+        <ul class="navbar-list">
+            <li data-navbar-link="">
+              <a href="/" class="navbar-link title-small has-state active">Inicio</a>
+            </li>
+            <li data-navbar-link="">
+              <a href="/" class="navbar-link title-small has-state ">Productos</a>
+            </li>
+            <li data-navbar-link="">
+              <a href="/" class="navbar-link title-small has-state ">Contacto</a>
+            </li>
+            <li data-navbar-link="">
+              <a href="/" class="navbar-link title-small has-state ">Novedades</a>
+            </li>
+        </ul>
+      </nav>
+
+      <!-- <button
+          class="icon-btn mis-a has-state"
+          aria-pressed="false"
+          aria-label="Muestra el menú lateral"
+          data-menu-panel-btn
+          data-side-bar-toggler
+          data-target="menu-panel-sidebar"
+      >
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+      </button> -->
+
+      <button class="icon-btn mis-a has-state" aria-pressed="false" aria-label="Mostrar el contenido del carrito" data-cart-panel-btn="" data-side-bar-toggler="" data-target="cart-panel-sidebar">
+          <span class="material-symbols-outlined" aria-hidden="true">shopping_cart</span>
+          <span class="btn-badge" data-cart-counter-budget="" style="display: none;">+99</span>
+      </button>
+    </header> 
+    <h1>Parcel Vanilla App</h1>
+    <p>Edit <code>src/index.html</code> to get started!</p>
+  </body>
+</html>
