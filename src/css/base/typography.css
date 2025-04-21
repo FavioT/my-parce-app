@@ -76,3 +76,35 @@
     line-height: 16px;
     letter-spacing: 0.5px;
 }
+
+/* responsive for larger than 600px screen */
+
+@media (min-width: 600px) {
+    :root {
+        /* TYPOGRAPHY */
+
+        /* font size */
+        --fs-display-large: 3.6rem;
+        --fs-display-medium: 3.6rem;
+        --fs-display-small: 3rem;
+
+    }
+
+    /* TYPOGRAPHY */
+
+    .display-large,
+    .display-medium {
+        line-height: 44px;
+    }
+
+    .display-small {
+        line-height: 36px;
+    }
+
+    .title-small {
+        font-size: 1.6rem;
+        font-weight: var(--weight-medium);
+        line-height: 24px;
+        letter-spacing: 0.15px;
+    }
+}

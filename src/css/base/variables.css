@@ -117,15 +117,33 @@
 
 @media(prefers-reduced-motion: no-preference) {
   :root {
-{
-    :root {
-        /* TRANSITION */
-        --transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-        --transition-short: 200ms var(--transition-timing-function);
-        --transition-medium: 500ms var(--transition-timing-function);
+    /* TRANSITION */
+    --transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    --transition-short: 200ms var(--transition-timing-function);
+    --transition-medium: 500ms var(--transition-timing-function);
 
-        --transition-1: 0.25s ease;
+    --transition-1: 0.25s ease;
 
-        --transition-timing: 0.2s ease;
+    --transition-timing: 0.2s ease;
+  }
+}
+
+/* responsive for larger than 768px screen */
+
+@media (min-width: 768px) {
+  :root {
+    /* OTHERS */
+
+    --header-height: 72px;
+    --mobile-nav-height: 0;
+  }
+}
+
+/* responsive for larger than 992px screen */
+
+@media (min-width: 992px) {
+  :root {
+    /* OTHERS */
+    --header-height: 90px;
   }
 }

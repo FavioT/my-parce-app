@@ -8,8 +8,8 @@
     "start": "parcel",
     "build": "parcel build"
   },
-  "dependencies": {},
   "devDependencies": {
-    "parcel": "latest"
+    "parcel": "latest",
+    "sharp": "^0.33.5"
   }
 }

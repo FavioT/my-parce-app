@@ -1,0 +1,1 @@
+export const pageName = 'Herrajes Oeste';
