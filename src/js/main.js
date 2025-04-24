@@ -1,4 +1,7 @@
-import { Header } from './components/header';
+import { HeaderBuilder } from './components/header';
+import { CatalogBuilder } from './components/catalog';
+import { setSuperiorBanner } from './utils/helpers';
+import { SearchInput } from './utils/searchInput';
 
 const navbarItems = [
     {
@@ -24,7 +27,14 @@ const navbarItems = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-    const header = new Header("[data-header]");
-    header.setLogo();
-    header.createNavbar(navbarItems);
+    const header = new HeaderBuilder('[data-header]');
+    header.setLogo().createNavbar(navbarItems).addShoppingCartButton();
+
+    setSuperiorBanner();
+
+    const catalog = new CatalogBuilder('[data-catalog-section]');
+    catalog.setTitle().loadItems();
+
+    const search = new SearchInput();
+    search.mount('[data-products-catalog]');
 });

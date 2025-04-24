@@ -1,10 +1,12 @@
-.hero-image-banner[data-main-banner-1] {
+@import './../base/variables.css';
+
+.hero-image-banner[data-main-banner-superior] {
     margin-block-start: -16px;
 }
 
-.hero-image-banner[data-main-banner-1] .img-container {
+[data-main-banner-superior] .img-container {
     background-color: var(--image-background);
-    background-image: url(../images/banner-backgroud-image-1.webp);
+    /* background-image: url(../images/banner-backgroud-image-1.webp); */
     color: var(--on-background);
     background-repeat: no-repeat;
     background-position: center;
@@ -78,7 +80,7 @@
 .hero-image-banner[data-main-banner-2] .img-container {
     cursor: pointer;
     background-color: var(--image-background);
-    background-image: url(../images/banner-backgroud-image-2.webp);
+    /* background-image: url(../images/banner-backgroud-image-2.webp); */
     color: var(--on-background);
     background-repeat: no-repeat;
     background-position: center;

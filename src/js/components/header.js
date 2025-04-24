@@ -1,20 +1,17 @@
 import { Component } from './component';
-import { pageName } from '../../js/utils/helpers';
+import { PAGE_NAME } from '../../js/utils/helpers';
 
-export class Header extends Component {
+// Simple Builder Pattern
+export class HeaderBuilder extends Component {
     constructor(selector) {
         super(selector);
     }
     
-    setTitle(title) {
-        this.render(`<h1>${title}</h1>`);
-    }
-
     createNavbar(navbarItems) {
-        let navbar = document.createElement('navbar');
-        navbar.className = 'navbar';
-        navbar.setAttribute('data-navbar-desktop', '');
-        navbar.setAttribute('data-item-active', 'Inicio');
+        let $navbar = document.createElement('navbar');
+        $navbar.className = 'navbar';
+        $navbar.setAttribute('data-navbar-desktop', '');
+        $navbar.setAttribute('data-item-active', 'Inicio');
 
         let list = document.createElement('ul');
         list.className = 'navbar-list';
@@ -30,8 +27,10 @@ export class Header extends Component {
             list.append(li);
         });
 
-        navbar.append(list);
-        this.element.append(navbar);
+        $navbar.append(list);
+        this.element.append($navbar);
+
+        return this;
     }
 
     setLogo() {
@@ -46,14 +45,16 @@ export class Header extends Component {
 
         const image = document.createElement('img');
         image.src = imageUrl.pathname;
-        image.alt = pageName;
-        image.title = pageName;
+        image.alt = PAGE_NAME;
+        image.title = PAGE_NAME;
         image.className = 'logo-light';
         image.width = '280';
         image.height = '48';
 
         imageContainer.append(image);
         this.element.append(imageContainer);
+
+        return this;
     }
 
     addShoppingCartButton() {
@@ -64,5 +65,22 @@ export class Header extends Component {
         button.setAttribute('data-cart-panel-btn', '');
         button.setAttribute('data-side-bar-toggler', '');
         button.setAttribute('data-target', 'cart-panel-sidebar');
+
+        let icon = document.createElement('span');
+        icon.className = 'material-symbols-outlined';
+        icon.ariaHidden = 'true';
+        icon.textContent = 'shopping_cart';
+
+        let badge = document.createElement('span');
+        badge.className = 'btn-badge';
+        badge.setAttribute('data-cart-counter-budget', '');
+        badge.style.display = 'none';
+
+        button.append(icon);
+        button.append(badge);
+
+        this.element.append(button);
+
+        return this;
     }
 }
