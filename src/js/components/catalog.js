@@ -6,39 +6,6 @@ import {
 } from '../utils/helpers';
 import { Component } from './component';
 
-const mockRequest = [
-    {
-        "id": 29,
-        "name": "Muebles",
-        "slug": "muebles",
-        "icon": "muebles.png",
-        "image": null,
-        "type": "category",
-        "capitalized_name": "Muebles",
-        "icon_url": "https://www.herrajesoeste.com/assets/images/categories/muebles.png"
-    },
-    {
-        "id": 1,
-        "name": "Hogar",
-        "slug": "hogar",
-        "icon": "hogar.png",
-        "image": null,
-        "type": "category",
-        "capitalized_name": "Hogar",
-        "icon_url": "https://www.herrajesoeste.com/assets/images/categories/hogar.png"
-    },
-    {
-        "id": 62,
-        "name": "Obra",
-        "slug": "obra",
-        "icon": "obra.png",
-        "image": null,
-        "type": "category",
-        "capitalized_name": "Obra",
-        "icon_url": "https://www.herrajesoeste.com/assets/images/categories/obra.png"
-    },
-];
-
 // Simple Builder Pattern
 export class CatalogBuilder extends Component {
     gridTemplate = '';
@@ -64,18 +31,19 @@ export class CatalogBuilder extends Component {
     }
 
     loadItems() {
-        /*this.apiService.fetchData([], (response) => {
-            console.log(this.element);
-            console.log(response);
-        });*/
+        this.apiService.fetchData([], (response) => {   
+            if (!response.length) {
+                return;
+            }
 
-        const catalogGridList = document.createElement('ul');
-        catalogGridList.classList.add('catalog-grid-list');
-        catalogGridList.setAttribute('data-category-grid-list', '');
+            const catalogGridList = document.createElement('ul');
+            catalogGridList.classList.add('catalog-grid-list');
+            catalogGridList.setAttribute('data-category-grid-list', '');
 
-        mockRequest.forEach((element) => this.gridTemplate += homeCatalogTemplate(element));
-        catalogGridList.innerHTML = this.gridTemplate;
-        this.element.append(catalogGridList);
+            response.forEach((element) => this.gridTemplate += homeCatalogTemplate(element));
+            catalogGridList.innerHTML = this.gridTemplate;
+            this.element.append(catalogGridList);
+        });
 
         return this;
     }
