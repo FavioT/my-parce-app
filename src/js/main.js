@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setSuperiorBanner();
 
     const catalog = new CatalogBuilder('[data-catalog-section]');
-    catalog.setTitle().loadItems();
+    catalog.setTitle().loadItems().setOnClickEvent();
 
     const search = new SearchInput();
-    search.mount('[data-products-catalog]');
+    search.mount('[data-products-catalog]').setKeydownEvent();
 });

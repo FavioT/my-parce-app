@@ -1,4 +1,5 @@
 import { ApiService } from '../services/apiService';
+import { EventManager } from '../utils/eventmanager';
 import { 
     BASE_API_URL,
     homeCatalogTemplate,
@@ -77,6 +78,17 @@ export class CatalogBuilder extends Component {
         this.element.append(catalogGridList);
 
         return this;
+    }
+
+    setOnClickEvent() {
+        const $catalogFiltersBtns = document.querySelectorAll('[data-product-filter]');
+        EventManager.addEventOnElements($catalogFiltersBtns, 'click', (event) => {
+            const { productFilter, filterType } = event.target.dataset;
+            
+            if (productFilter && filterType) {
+                window.location.href = `/productos.html?${filterType}=${productFilter}`;
+            }
+        });
     }
 
 } 
