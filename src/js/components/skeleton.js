@@ -1,24 +1,17 @@
 import { Component } from './component';
 
 export class Skeleton extends Component {
-    $skeletonTemplate = `
+    skeletonCard = `
         <div class="showcase skeleton-card">
             <div class="showcase-banner skeleton"></div>
+            <div class="showcase-content">
+                <div class="showcase-title skeleton"></div>
+                <div class="showcase-text skeleton"></div>
+            </div>
         </div>
     `;
 
-    constructor(selector) {
-        super(selector);
-    }
-
-    init() {
-        const gridList = document.createElement('div');
-        gridList.classList.add('product-grid');
-        gridList.innerHTML = this.$skeletonTemplate.repeat(10);
-        this.element.innerHTML = gridList.innerHTML;
-    }
-
-    remove() {
-        this.element.remove();
+    getSkeletonCard(repeat) {
+        return this.skeletonCard.repeat(repeat);
     }
 }

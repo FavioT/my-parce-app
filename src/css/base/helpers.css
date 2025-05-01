@@ -81,3 +81,28 @@
     gap: 8px;
     z-index: 4;
 }
+
+@keyframes fade-in {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* responsive for larger than 600px screen */
+@media (min-width: 600px) {
+    .container {
+        padding-inline: 32px;
+    }
+}
+
+/* responsive for larger than 1400px screen */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1280px;
+    }
+}

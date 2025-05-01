@@ -1,7 +1,8 @@
 import { HeaderBuilder } from './components/header';
-import { CatalogBuilder } from './components/catalog';
+import { HomeCatalogBuilder } from './components/home-catalog';
 import { setSuperiorBanner } from './utils/helpers';
 import { SearchInput } from './utils/searchInput';
+import { HomeProducts } from './components/home-products';
 
 const navbarItems = [
     {
@@ -32,9 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setSuperiorBanner();
 
-    const catalog = new CatalogBuilder('[data-catalog-section]');
-    catalog.setTitle().loadItems().setOnClickEvent();
+    const homeCatalog = new HomeCatalogBuilder('[data-catalog-section]');
+    homeCatalog.setTitle().loadItems().setOnClickEvent();
 
     const search = new SearchInput();
     search.mount('[data-products-catalog]').setKeydownEvent();
+
+    const homeProducts = new HomeProducts('[data-product-grid-section]');
+    homeProducts.loadProducts();
 });

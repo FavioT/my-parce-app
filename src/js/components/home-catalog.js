@@ -7,7 +7,7 @@ import {
 import { Component } from './component';
 
 // Simple Builder Pattern
-export class CatalogBuilder extends Component {
+export class HomeCatalogBuilder extends Component {
     gridTemplate = '';
 
     constructor(selector) {
