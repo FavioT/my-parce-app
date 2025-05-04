@@ -48,7 +48,6 @@ export class ProductCard {
     }
 
     getAddToCartButton() {
-        console.log(this.productStockQty);
         if (this.productStockQty > 0) {
             const productInCart = this.getProductInCart();
             const stateClass = productInCart ? 'saved' : 'removed';

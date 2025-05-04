@@ -50,7 +50,6 @@ export class HomeProducts extends Component {
         });
 
         $productMain.querySelectorAll('.skeleton-card').forEach(element => element.remove());
-        console.log($productMain);
 
         const showMore = document.createElement('a');
         showMore.classList.add(...['btn', 'btn-secondary', 'label-large', 'has-state']);
@@ -58,13 +57,5 @@ export class HomeProducts extends Component {
         showMore.textContent = 'Ver más';
 
         $productMain.append(showMore);
-
-        /*
-        $productMain.innerHTML += `
-            <a
-                href="./productos.html"
-                class="btn btn-secondary label-large has-state"
-            >Ver mas</a>
-        `;*/
     }
 }

@@ -1,8 +1,12 @@
 import { HeaderBuilder } from './components/header';
 import { HomeCatalogBuilder } from './components/home-catalog';
-import { setSuperiorBanner } from './utils/helpers';
+import { 
+    setSuperiorBanner,
+    setVideoBanner, 
+} from './utils/helpers';
 import { SearchInput } from './utils/searchInput';
 import { HomeProducts } from './components/home-products';
+import { Carousel } from './components/carousel';
 
 const navbarItems = [
     {
@@ -41,4 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const homeProducts = new HomeProducts('[data-product-grid-section]');
     homeProducts.loadProducts();
+
+    setVideoBanner();
+
+    const carousel = new Carousel('.brands-wrapper', '.carousel', { autoPlay: true, autoPlayInterval: 1500 });
 });

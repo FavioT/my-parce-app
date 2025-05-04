@@ -4,6 +4,8 @@
 @import './pages/catalog.css';
 @import './pages/product.css';
 @import './components/skeleton.css';
+@import './sections/video-banner.css';
+@import './sections/brands.css';
 
 /*
 |--------------------------------------------------------------------------
