@@ -267,12 +267,6 @@
         max-width: max-content;
         margin-inline: auto;
     }
-
-    [data-latest-blog-news] .btn-primary,
-    .section[data-product-grid-section] .btn-secondary {
-        max-width: max-content;
-        margin-inline: auto;
-    }
 }
 
 @media (min-width: 768px) {

@@ -1,4 +1,6 @@
-export class ProductCard {
+// ToDo: Crear clase base para reutilizar métodos
+// ToDo: Renombrar métodos
+export class ShoppingCard {
     CLIENT_DOMAIN = 'herrajesoeste.com';
 
     constructor(data) {

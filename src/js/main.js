@@ -1,12 +1,12 @@
-import { HeaderBuilder } from './components/header';
-import { HomeCatalogBuilder } from './components/home-catalog';
+import { HeaderBuilder } from './components/header.builder';
+import { HomeCatalogBuilder } from './components/home-catalog.builder';
 import { 
     setSuperiorBanner,
     setVideoBanner, 
 } from './utils/helpers';
 import { SearchInput } from './utils/searchInput';
-import { HomeProducts } from './components/home-products';
 import { Carousel } from './components/carousel';
+import { HomeLatestGridFactory } from './components/home-latest-grid.factory';
 
 const navbarItems = [
     {
@@ -43,10 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const search = new SearchInput();
     search.mount('[data-products-catalog]').setKeydownEvent();
 
-    const homeProducts = new HomeProducts('[data-product-grid-section]');
-    homeProducts.loadProducts();
+    const factory = new HomeLatestGridFactory();
+    const homeProducts = factory.createGrid('latest-products');
+    homeProducts.loadItems();
 
     setVideoBanner();
 
     const carousel = new Carousel('.brands-wrapper', '.carousel', { autoPlay: true, autoPlayInterval: 1500 });
+
+    const homeNews = factory.createGrid('latest-news');
+    homeNews.loadItems();
 });

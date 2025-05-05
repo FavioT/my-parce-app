@@ -1,12 +1,12 @@
-import { Component } from './component';
 import { ApiService } from '../services/apiService';
 import { BASE_API_URL } from '../utils/helpers';
 import { Skeleton } from './skeleton';
-import { ProductCard } from './productCard';
+import { ItemCardFactory } from './item-card.factory';
 
-export class HomeProducts extends Component {
-    constructor(selector) {
-        super(selector);
+// ToDo: Lograr funcionalidad de agregar/quitar productos al carrito, ocultar/mostrar icono correspondiente.
+export class HomeLatestProducts {
+    constructor(element) {
+        this.element = element;
         this.apiService = new ApiService(`${BASE_API_URL}/products`);
         this.createContainers();
     }
@@ -23,7 +23,7 @@ export class HomeProducts extends Component {
         this.element.append(container);
     }
 
-    loadProducts() {
+    loadItems() {
         const $productMain = this.element.querySelector('[data-product-main-grid]');
 
         const gridList = document.createElement('div');
@@ -43,7 +43,8 @@ export class HomeProducts extends Component {
                 product.isPremium = product.hasOwnProperty('benefit') && parseInt(product.benefit?.price) > 0;
                 product.premiumPrice = product.isPremium ? product.benefit?.formatted_price : '0.00';
 
-                const productCard = new ProductCard(product);
+                const factory = new ItemCardFactory();
+                const productCard = factory.createCard('product', product);
                 const renderedCard = productCard.render(`${100 * index}ms`);
                 gridList.appendChild(renderedCard);
             });
