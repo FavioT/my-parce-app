@@ -234,7 +234,8 @@
 }
 
 [data-featured-product-main] .btn-primary,
-.section[data-product-grid-section] .btn-secondary {
+.section[data-product-grid-section] .btn-secondary,
+.section[data-product-grid-section] .btn-primary {
     max-width: 100%;
     margin-block-start: 20px;
 }
@@ -263,7 +264,8 @@
 
 @media (min-width: 600px) {
     [data-featured-product-main] .btn-primary,
-    .section[data-product-grid-section] .btn-secondary {
+    .section[data-product-grid-section] .btn-secondary,
+    .section[data-product-grid-section] .btn-primary {
         max-width: max-content;
         margin-inline: auto;
     }

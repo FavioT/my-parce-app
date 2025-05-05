@@ -29,7 +29,7 @@ export class MinimalCard {
             </div>
             <div class="showcase-content">
                 <h3 class="showcase-title">
-                    <a href="/producto.html?id=${this.id}" class="card-link">${this.title}</a>
+                    <a href="/articulo.html?post_id=${this.id}" class="card-link">${this.title}</a>
                 </h3>
                 ${this.getPriceBox()}
             </div>`;

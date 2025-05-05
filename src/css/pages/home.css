@@ -73,11 +73,11 @@
     background-color: var(--primary-hover);
 }
 
-.hero-image-banner[data-main-banner-2] {
+.hero-image-banner[data-main-banner-inferior] {
     margin-block-start: 0;
 }
 
-.hero-image-banner[data-main-banner-2] .img-container {
+.hero-image-banner[data-main-banner-inferior] .img-container {
     cursor: pointer;
     background-color: var(--image-background);
     /* background-image: url(../images/banner-backgroud-image-2.webp); */

@@ -1,5 +1,7 @@
 export const PAGE_NAME = 'Herrajes Oeste';
 
+export const PAGE_DESCRIPTION = 'Herrajes Oeste - La mejor calidad en herrajes para la construcción y la industria.';
+
 export const BASE_API_URL = 'http://127.0.0.1:8000/api/v1';
 
 export const setSuperiorBanner = () => {
@@ -41,8 +43,23 @@ export const setVideoBanner = () => {
 
     const $videoBanner = document.querySelector('[data-video-banner]');
     $videoBanner.append(container);
-}
+};
 
+export const setInferiorBanner = () => {
+    const imageUrl = new URL(
+        './../../assets/images/inferior-banner-image.webp',
+        import.meta.url
+    );
+
+    const container = document.createElement('div');
+    container.classList.add('img-container');
+    container.style.backgroundImage = `url(${imageUrl.pathname})`;
+
+    const $inferiorBanner = document.querySelector('[data-main-banner-inferior]');
+    $inferiorBanner.append(container);
+};
+
+// ToDo: Quitar esto de alguna manera.
 export const homeCatalogTemplate = ({ id, name, slug, icon, type, capitalized_name, icon_url }) => `
     <li>
         <div class="catalog-card">

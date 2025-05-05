@@ -2,11 +2,13 @@ import { HeaderBuilder } from './components/header.builder';
 import { HomeCatalogBuilder } from './components/home-catalog.builder';
 import { 
     setSuperiorBanner,
-    setVideoBanner, 
+    setVideoBanner,
+    setInferiorBanner,
 } from './utils/helpers';
 import { SearchInput } from './utils/searchInput';
 import { Carousel } from './components/carousel';
 import { HomeLatestGridFactory } from './components/home-latest-grid.factory';
+import { Footer } from './components/footer';
 
 const navbarItems = [
     {
@@ -31,6 +33,7 @@ const navbarItems = [
     }
 ];
 
+// ToDo: Refactorizar creación de banners, ver que patrón se puede aplicar para no repetir código.
 document.addEventListener("DOMContentLoaded", () => {
     const header = new HeaderBuilder('[data-header]');
     header.setLogo().createNavbar(navbarItems).addShoppingCartButton();
@@ -53,4 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const homeNews = factory.createGrid('latest-news');
     homeNews.loadItems();
+
+    setInferiorBanner();
+
+    const footer = new Footer();
+    footer.render(document.body);
 });
