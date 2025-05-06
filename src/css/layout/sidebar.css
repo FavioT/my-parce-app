@@ -113,8 +113,3 @@
 [data-cart-total-benefits-content] .cart-total-price.benefit b {
     text-transform: uppercase;
 }
-
-.footer-logo {
-    display: flex;
-    flex-direction: row-reverse;
-}

@@ -35,3 +35,8 @@
     display: grid;
     place-items: center;
 }
+
+.tags .section-text {
+    max-width: 50ch;
+    margin-inline: auto;
+}

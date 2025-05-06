@@ -436,6 +436,102 @@ createServer({
                     "to": 4
                 }
             }
+        }),
+        this.get(`${BASE_URL}/categories/tags`, () => {
+            return {
+                "data": [
+                    {
+                        "id": 64,
+                        "name": "Abrasivos",
+                        "capitalized_name": "Abrasivos",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 18,
+                        "name": "Accesorios",
+                        "capitalized_name": "Accesorios",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 86,
+                        "name": "Accesorios",
+                        "capitalized_name": "Accesorios",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 65,
+                        "name": "Adhesivos, selladores y embalaje ",
+                        "capitalized_name": "Adhesivos, Selladores Y Embalaje ",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 81,
+                        "name": "Aéreo",
+                        "capitalized_name": "Aéreo",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 61,
+                        "name": "Aluminio",
+                        "capitalized_name": "Aluminio",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 107,
+                        "name": "Aluminio",
+                        "capitalized_name": "Aluminio",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 72,
+                        "name": "Aluminio (bisagras y accesorios)",
+                        "capitalized_name": "Aluminio (Bisagras Y Accesorios)",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 63,
+                        "name": "Armado y terminación",
+                        "capitalized_name": "Armado Y Terminación",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 2,
+                        "name": "Baño",
+                        "capitalized_name": "Baño",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 43,
+                        "name": "Bases y patines",
+                        "capitalized_name": "Bases Y Patines",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 31,
+                        "name": "Bisagras",
+                        "capitalized_name": "Bisagras",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 69,
+                        "name": "Bisagras",
+                        "capitalized_name": "Bisagras",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 71,
+                        "name": "Bisagras de puertas para soldar ",
+                        "capitalized_name": "Bisagras De Puertas Para Soldar ",
+                        "icon_url": null
+                    },
+                    {
+                        "id": 70,
+                        "name": "Bisagras para puertas de madera",
+                        "capitalized_name": "Bisagras Para Puertas De Madera",
+                        "icon_url": null
+                    },
+                ]
+            }
         })
     }
 });

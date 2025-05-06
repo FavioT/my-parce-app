@@ -1,5 +1,7 @@
 import '../../css/layout/footer.css';
+import '../../css/components/badge.css';
 import { PAGE_NAME } from '../utils/helpers';
+import { PillList } from './pill-list';
 
 const data = [
     { label: 'Dirección:', content: ['Matienzo 1275'], type: 'text' },
@@ -124,10 +126,55 @@ export class Footer {
         return wrapper;
     }
 
+    createVersadoLogo() {
+        const container = document.createElement('div');
+        container.classList.add(...['footer-bottom', 'footer-logo']);
+
+        const link = document.createElement('a');
+        link.setAttribute('href', 'https://www.versado.com');
+        link.setAttribute('target', '_blank');
+
+        const imageUrl = new URL(
+            '../../assets/images/versado-web-logo.png',
+            import.meta.url
+        );
+
+        const image = document.createElement('img');
+        image.setAttribute('src', imageUrl.pathname);
+        image.setAttribute('alt', 'Versado Web');
+
+        link.appendChild(image);
+        container.appendChild(link);
+        return container;
+    }
+
+    createPillList() {
+        const pillContainer = document.createElement('div');
+        pillContainer.classList.add(...['section', 'footer-categories', 'tags']);
+        pillContainer.setAttribute('data-category-section', '');
+
+        const container = document.createElement('div');
+        container.classList.add('container');
+
+        const title = document.createElement('p');
+        title.classList.add(...['body-medium', 'section-text']);
+        title.textContent = 'Elige buscar en cualquiera de nuestras principales categorías';
+
+        container.append(title);
+
+        const pillList = new PillList(container);
+        pillList.render();
+
+        pillContainer.append(container);
+        return pillContainer;
+    }
+
     render(parentElement) {
         const footer = document.createElement('footer');
         footer.className = 'footer';
         footer.appendChild(this.createWrapper());
+        footer.appendChild(this.createPillList());
+        footer.appendChild(this.createVersadoLogo());
         parentElement.appendChild(footer);
     }
 }
