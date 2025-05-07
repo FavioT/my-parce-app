@@ -1,5 +1,8 @@
 import { ShoppingCart } from './shopping-cart';
 
+const shoppingCart = ShoppingCart.getInstance();
+console.log(shoppingCart.getItems());
+
 // ToDo: Crear clase base para reutilizar métodos
 // ToDo: Renombrar métodos
 export class MaximumCard {
@@ -16,20 +19,12 @@ export class MaximumCard {
         this.imageUrl = data.image_url;
         this.isNew = Boolean(data.isNew);
         this.isPremium = Boolean(data.isPremium);
+        this.shoppingCart = ShoppingCart.getInstance();
+        console.log(this.shoppingCart.getItems()); 
     }
 
     getProductInCart() {
         return window.localStorage.getItem(`${this.CLIENT_DOMAIN}-product-${this.id}`);
-    }
-
-    getBadge() {
-        if (this.isPremium) {
-            return '<p class="showcase-badge angle success">precio exclusivo</p>';
-        }
-        if (this.isNew) {
-            return '<p class="showcase-badge angle primary">nuevo</p>';
-        }
-        return '';
     }
 
     getPriceBox() {
@@ -51,59 +46,104 @@ export class MaximumCard {
             `;
     }
 
+    getBadge() {
+        const badge = document.createElement('p');
+        badge.classList.add(...['showcase-badge', 'angle']);
+        
+        if (this.isPremium) {
+            badge.classList.add('success');
+            badge.innerText = 'precio exclusivo';
+        }
+        if (this.isNew) {
+            badge.classList.add('primary');
+            badge.innerText = 'nuevo';
+        }
+        return badge;
+    }
+
+    getImage() {
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add(...['showcase-banner', 'img-holder']);
+
+        const image = document.createElement('img');
+        image.setAttribute('src', this.imageUrl);
+        image.setAttribute('alt', this.title);
+        image.setAttribute('title', this.title);
+        image.setAttribute('loading', 'lazy');
+        image.setAttribute('width', '300');
+        image.classList.add(...['product-img', 'default']);
+
+        imageContainer.appendChild(image);
+        return imageContainer;
+    }
+
     getAddToCartButton() {
+        const showcaseActions = document.createElement('div');
+        showcaseActions.classList.add('showcase-actions');
+
+        const button = document.createElement('button');
+        button.classList.add('icon-btn');
+
         if (this.productStockQty > 0) {
             const productInCart = this.getProductInCart();
             const stateClass = productInCart ? 'saved' : 'removed';
             const label = productInCart ? 'Eliminar del carrito' : 'Agregar al carrito';
 
-            const button = document.createElement('button');
-            button.classList.add(...['btn-action', 'icon-btn', stateClass]);
+            button.classList.add(...['btn-action', stateClass]);
             button.setAttribute('aria-label', label);
             button.setAttribute('data-producto-id', this.id);
-            button.setAttribute('onclick', `agregarProductoAlCarrito(this, '${this.id}')`);
+
+            button.addEventListener('click', (event) => {
+                const productId = event.currentTarget.getAttribute('data-producto-id');
+                if (productId) {
+                    this.shoppingCart.addItem({
+                        id: productId,
+                        name: this.title,
+                        price: this.productPrice,
+                        quantity: 1,
+                    });
+                }
+                console.log(this.shoppingCart.getItems());
+            });
+
             button.innerHTML = `
                 <span class="material-symbols-outlined bookmark-add" aria-hidden="true">add_shopping_cart</span>
                 <span class="material-symbols-outlined bookmark" aria-hidden="true">shopping_cart</span>
             `;
-
-            /*return `
-                <button
-                    class="btn-action icon-btn ${stateClass}"
-                    onclick="agregarProductoAlCarrito(this, '${this.id}')"
-                    aria-label="${label}"
-                    data-producto-id="${this.id}"
-                >
-                    <span class="material-symbols-outlined bookmark-add" aria-hidden="true">add_shopping_cart</span>
-                    <span class="material-symbols-outlined bookmark" aria-hidden="true">shopping_cart</span>
-                </button>`;
-            */
-
-            return button.outerHTML;
         }
-    
-        return `<button class="icon-btn"></button>`;
+
+        showcaseActions.appendChild(button);
+        return showcaseActions;
+    }
+
+    createShowcase() {
+        const showcase = document.createElement('div');
+        showcase.classList.add('showcase-content');
+
+        const title = document.createElement('h3');
+        title.classList.add('showcase-title');
+
+        const link = document.createElement('a');
+        link.classList.add('card-link');
+        link.setAttribute('href', `/producto.html?id=${this.id}`);
+        link.textContent = this.title;
+
+        title.appendChild(link);
+        showcase.appendChild(title);
+        showcase.innerHTML += this.getPriceBox();
+        showcase.appendChild(this.getAddToCartButton());
+
+        return showcase;
     }
 
     render(animationDelay = '0ms') {
         const card = document.createElement('div');
         card.classList.add('showcase');
         card.style.animationDelay = animationDelay;
-    
-        card.innerHTML = `
-            ${this.getBadge()}
-            <div class="showcase-banner img-holder">
-                <img src="${this.imageUrl}" alt="${this.title}" title="${this.title}" class="product-img default" loading="lazy" width="300" />
-            </div>
-            <div class="showcase-content">
-                <h3 class="showcase-title">
-                    <a href="/producto.html?id=${this.id}" class="card-link">${this.title}</a>
-                </h3>
-                ${this.getPriceBox()}
-                <div class="showcase-actions">
-                ${this.getAddToCartButton()}
-                </div>
-            </div>`;
+
+        card.append(this.getBadge());
+        card.append(this.getImage());
+        card.append(this.createShowcase());
     
         return card;
       }
