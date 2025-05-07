@@ -532,6 +532,219 @@ createServer({
                     },
                 ]
             }
+        }),
+        this.get(`${BASE_URL}/products/8803`, () => {
+            return {
+                "data": {
+                    "id": 8803,
+                    "shop_category_id": 68,
+                    "name": "TOR JAP 6 X 3/4 (X 100)",
+                    "slug": "tor-jap-6-x-34-x-100",
+                    "sku": null,
+                    "code": "HGR02",
+                    "barcode": null,
+                    "short_description": null,
+                    "description": null,
+                    "qty": 15,
+                    "price": "15665.87",
+                    "int_price": 1566587,
+                    "formatted_price": "15.665,87",
+                    "seo_title": null,
+                    "seo_description": null,
+                    "seo_keywords": null,
+                    "image": "ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                    "fallback_image": "no-image.webp",
+                    "image_url": "https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                    "category": {
+                        "id": 68,
+                        "parent_id": 63,
+                        "shop_product_id": null,
+                        "name": "Tornillos, bulones y mas ...",
+                        "slug": "tornillos",
+                        "description": null,
+                        "image": null,
+                        "image_url": null,
+                        "icon": null,
+                        "parent": {
+                            "id": 63,
+                            "parent_id": 62,
+                            "shop_product_id": null,
+                            "name": "Armado y terminación",
+                            "slug": "armado-y-terminacion",
+                            "description": null,
+                            "image": null,
+                            "image_url": null,
+                            "icon": null,
+                            "parent": {
+                                "id": 62,
+                                "parent_id": null,
+                                "shop_product_id": null,
+                                "name": "Obra",
+                                "slug": "obra",
+                                "description": null,
+                                "image": null,
+                                "image_url": null,
+                                "icon": null,
+                                "parent": null,
+                                "benefit": null
+                            },
+                            "benefit": null
+                        },
+                        "benefit": null
+                    },
+                    "images": [
+                        {
+                            "file_name": "ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                            "original_url": "https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png"
+                        }
+                    ],
+                    "posts": [],
+                    "videos": [],
+                    "tags": []
+                }
+            }
+        }),
+        this.get(`${BASE_URL}/products/8813`, () => {
+            return {
+                "data": {
+                    "id": 8813,
+                    "shop_category_id": 68,
+                    "name": "TOR JAP 6 X 3/4 (X 100)",
+                    "slug": "tor-jap-6-x-34-x-100",
+                    "sku": null,
+                    "code": "HGR02",
+                    "barcode": null,
+                    "short_description": null,
+                    "description": null,
+                    "qty": 15,
+                    "price": "15665.87",
+                    "int_price": 1566587,
+                    "formatted_price": "15.665,87",
+                    "seo_title": null,
+                    "seo_description": null,
+                    "seo_keywords": null,
+                    "image": "ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                    "fallback_image": "no-image.webp",
+                    "image_url": "https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                    "category": {
+                        "id": 68,
+                        "parent_id": 63,
+                        "shop_product_id": null,
+                        "name": "Tornillos, bulones y mas ...",
+                        "slug": "tornillos",
+                        "description": null,
+                        "image": null,
+                        "image_url": null,
+                        "icon": null,
+                        "parent": {
+                            "id": 63,
+                            "parent_id": 62,
+                            "shop_product_id": null,
+                            "name": "Armado y terminación",
+                            "slug": "armado-y-terminacion",
+                            "description": null,
+                            "image": null,
+                            "image_url": null,
+                            "icon": null,
+                            "parent": {
+                                "id": 62,
+                                "parent_id": null,
+                                "shop_product_id": null,
+                                "name": "Obra",
+                                "slug": "obra",
+                                "description": null,
+                                "image": null,
+                                "image_url": null,
+                                "icon": null,
+                                "parent": null,
+                                "benefit": null
+                            },
+                            "benefit": null
+                        },
+                        "benefit": null
+                    },
+                    "images": [
+                        {
+                            "file_name": "ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                            "original_url": "https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png"
+                        }
+                    ],
+                    "posts": [],
+                    "videos": [],
+                    "tags": []
+                }
+            }
+        }),
+        this.get(`${BASE_URL}/products/7676`, () => {
+            return {
+                "data": {
+                    "id": 7676,
+                    "shop_category_id": 68,
+                    "name": "TOR JAP 6 X 3/4 (X 100)",
+                    "slug": "tor-jap-6-x-34-x-100",
+                    "sku": null,
+                    "code": "HGR02",
+                    "barcode": null,
+                    "short_description": null,
+                    "description": null,
+                    "qty": 15,
+                    "price": "15665.87",
+                    "int_price": 1566587,
+                    "formatted_price": "15.665,87",
+                    "seo_title": null,
+                    "seo_description": null,
+                    "seo_keywords": null,
+                    "image": "ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                    "fallback_image": "no-image.webp",
+                    "image_url": "https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                    "category": {
+                        "id": 68,
+                        "parent_id": 63,
+                        "shop_product_id": null,
+                        "name": "Tornillos, bulones y mas ...",
+                        "slug": "tornillos",
+                        "description": null,
+                        "image": null,
+                        "image_url": null,
+                        "icon": null,
+                        "parent": {
+                            "id": 63,
+                            "parent_id": 62,
+                            "shop_product_id": null,
+                            "name": "Armado y terminación",
+                            "slug": "armado-y-terminacion",
+                            "description": null,
+                            "image": null,
+                            "image_url": null,
+                            "icon": null,
+                            "parent": {
+                                "id": 62,
+                                "parent_id": null,
+                                "shop_product_id": null,
+                                "name": "Obra",
+                                "slug": "obra",
+                                "description": null,
+                                "image": null,
+                                "image_url": null,
+                                "icon": null,
+                                "parent": null,
+                                "benefit": null
+                            },
+                            "benefit": null
+                        },
+                        "benefit": null
+                    },
+                    "images": [
+                        {
+                            "file_name": "ka7tJhwPNmZzGkZbqeElHLYnKQ.png",
+                            "original_url": "https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png"
+                        }
+                    ],
+                    "posts": [],
+                    "videos": [],
+                    "tags": []
+                }
+            }
         })
     }
 });

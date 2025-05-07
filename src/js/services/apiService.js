@@ -1,5 +1,6 @@
 import { BASE_API_URL } from '../utils/helpers';
 
+// ToDo: Cambiar esta clase a Singleton
 export class ApiService {
     constructor(baseUrl = BASE_API_URL) {
         this.baseUrl = baseUrl;

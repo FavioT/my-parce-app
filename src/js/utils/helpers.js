@@ -4,6 +4,8 @@ export const PAGE_DESCRIPTION = 'Herrajes Oeste - La mejor calidad en herrajes p
 
 export const BASE_API_URL = 'http://127.0.0.1:8000/api/v1';
 
+export const CLIENT_DOMAIN = 'herrajesoeste.com';
+
 export const setSuperiorBanner = () => {
     const imageUrl = new URL(
         './../../assets/images/superior-banner-image.webp',

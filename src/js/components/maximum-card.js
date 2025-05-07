@@ -1,13 +1,17 @@
 import { ShoppingCart } from './shopping-cart';
+import { LocalStorageManager } from '../services/local-storage-manager';
+import { CLIENT_DOMAIN } from '../utils/helpers';
+import { ApiService } from '../services/apiService';
+import { BASE_API_URL } from '../utils/helpers';
 
 const shoppingCart = ShoppingCart.getInstance();
 console.log(shoppingCart.getItems());
 
 // ToDo: Crear clase base para reutilizar métodos
 // ToDo: Renombrar métodos
+// ToDo: Ver si es realmente necesario guardar todo el objecto de producto en el localStorage o solo el id y la cantidad
+// ToDo: Delegar responsabilidad de agregar items al carrito
 export class MaximumCard {
-    CLIENT_DOMAIN = 'herrajesoeste.com';
-
     constructor(data) {
         this.productStockQty = data.qty ?? 0;
         this.productPrice = data.formatted_price ?? 0.00;
@@ -20,11 +24,11 @@ export class MaximumCard {
         this.isNew = Boolean(data.isNew);
         this.isPremium = Boolean(data.isPremium);
         this.shoppingCart = ShoppingCart.getInstance();
-        console.log(this.shoppingCart.getItems()); 
+        this.storage = new LocalStorageManager(CLIENT_DOMAIN);
     }
 
     getProductInCart() {
-        return window.localStorage.getItem(`${this.CLIENT_DOMAIN}-product-${this.id}`);
+        return this.storage.getItem(`product-${this.id}`);
     }
 
     getPriceBox() {
@@ -77,6 +81,39 @@ export class MaximumCard {
         return imageContainer;
     }
 
+    // ToDo: Mover implementación
+    getProductInfo(productId) {
+        const apiService = new ApiService(`${BASE_API_URL}/products/${productId}`);
+        apiService.fetchData([], (response) => {
+            const productData = { amount : 1, ...response.data };
+
+            if (productData.hasOwnProperty('benefit') && parseInt(productData.benefit?.int_price) > 0) {
+                productData.intPremiumPrice = productData.benefit.int_price;
+            }
+
+            this.shoppingCart.addItem(productData);
+
+            
+            // element.classList.toggle('removed');
+            // element.classList.toggle('saved');
+            // showSnackbarNotification('Producto agregado al carrito');
+
+            //if (cartSidebarPanel) {
+                // updateCartSidebarContent(savedProductId);
+
+                // const cartSidebarPanelToggler = document.querySelector('[data-cart-panel-btn]');
+                //
+                // if (cartSidebarPanelToggler) {
+                //     cartSidebarPanelToggler.click();
+                // }
+            // }
+
+            // updateCartCounterBudget();
+            // updateTotalInCart();
+            // updateWhatsappBtn();
+        });
+    }
+
     getAddToCartButton() {
         const showcaseActions = document.createElement('div');
         showcaseActions.classList.add('showcase-actions');
@@ -96,14 +133,8 @@ export class MaximumCard {
             button.addEventListener('click', (event) => {
                 const productId = event.currentTarget.getAttribute('data-producto-id');
                 if (productId) {
-                    this.shoppingCart.addItem({
-                        id: productId,
-                        name: this.title,
-                        price: this.productPrice,
-                        quantity: 1,
-                    });
+                    this.getProductInfo(productId);
                 }
-                console.log(this.shoppingCart.getItems());
             });
 
             button.innerHTML = `

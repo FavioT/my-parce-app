@@ -1,7 +1,11 @@
+import { LocalStorageManager } from '../services/local-storage-manager';
+import { CLIENT_DOMAIN } from '../utils/helpers';
+
 // Singleton Desing Pattern for Shopping Cart
 export class ShoppingCart {
     constructor() {
         this.items = [];
+        this.storage = new LocalStorageManager(CLIENT_DOMAIN);
     }
 
     static getInstance() {
@@ -24,10 +28,11 @@ export class ShoppingCart {
 
     }
 
-    addItem(item) {
-        this.items.push(item);
+    addItem(productData) {
+        this.storage.addItem(`product-${productData.id}`, productData);
+        this.items.push(productData);
         this.updateBadgeCounter();
-    }
+    }   
 
     removeItem(itemId) {
         this.items = this.items.filter(item => item.id !== itemId);
