@@ -1,12 +1,12 @@
-import { ShoppingCard } from './shopping-card';
+import { MaximumCard } from './maximum-card';
 import { MinimalCard } from './minimal-card';
 
-// Factory pattern for creating different types of item cards
+// Factory Design Pattern for creating different types of item cards
 export class ItemCardFactory {
     createCard(type, data) {
         switch (type) {
             case 'product':
-                return new ShoppingCard(data);
+                return new MaximumCard(data);
             case 'post':
                 return new MinimalCard(data);
             default:

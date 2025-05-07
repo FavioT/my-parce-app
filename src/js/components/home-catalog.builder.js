@@ -6,7 +6,7 @@ import {
 } from '../utils/helpers';
 import { Component } from './component';
 
-// Simple Builder Pattern
+// Simple Builder Design Pattern
 export class HomeCatalogBuilder extends Component {
     gridTemplate = '';
 

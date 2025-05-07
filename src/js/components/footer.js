@@ -135,7 +135,7 @@ export class Footer {
         link.setAttribute('target', '_blank');
 
         const imageUrl = new URL(
-            '../../assets/images/versado-web-logo.png',
+            '../../assets/images/versado-web-logo.png?as=webp',
             import.meta.url
         );
 

@@ -1,7 +1,7 @@
 import { Component } from './component';
 import { PAGE_NAME } from '../utils/helpers';
 
-// Simple Builder Pattern
+// Simple Builder Design Pattern
 export class HeaderBuilder extends Component {
     constructor(selector) {
         super(selector);

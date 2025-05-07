@@ -9,6 +9,7 @@ import { SearchInput } from './utils/searchInput';
 import { Carousel } from './components/carousel';
 import { HomeLatestGridFactory } from './components/home-latest-grid.factory';
 import { Footer } from './components/footer';
+import './components/shopping-cart';
 
 const navbarItems = [
     {

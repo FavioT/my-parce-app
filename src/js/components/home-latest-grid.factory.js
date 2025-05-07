@@ -1,7 +1,7 @@
 import { HomeLatestNews } from './home-latest-news';
 import { HomeLatestProducts } from './home-latest-products';
 
-// Factory Pattern for creating different types of home latest grids
+// Factory Design Pattern for creating different types of home latest grids
 export class HomeLatestGridFactory {
     createGrid(type) {
         switch (type) {

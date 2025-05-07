@@ -1,6 +1,8 @@
+import { ShoppingCart } from './shopping-cart';
+
 // ToDo: Crear clase base para reutilizar métodos
 // ToDo: Renombrar métodos
-export class ShoppingCard {
+export class MaximumCard {
     CLIENT_DOMAIN = 'herrajesoeste.com';
 
     constructor(data) {
@@ -54,8 +56,18 @@ export class ShoppingCard {
             const productInCart = this.getProductInCart();
             const stateClass = productInCart ? 'saved' : 'removed';
             const label = productInCart ? 'Eliminar del carrito' : 'Agregar al carrito';
-    
-            return `
+
+            const button = document.createElement('button');
+            button.classList.add(...['btn-action', 'icon-btn', stateClass]);
+            button.setAttribute('aria-label', label);
+            button.setAttribute('data-producto-id', this.id);
+            button.setAttribute('onclick', `agregarProductoAlCarrito(this, '${this.id}')`);
+            button.innerHTML = `
+                <span class="material-symbols-outlined bookmark-add" aria-hidden="true">add_shopping_cart</span>
+                <span class="material-symbols-outlined bookmark" aria-hidden="true">shopping_cart</span>
+            `;
+
+            /*return `
                 <button
                     class="btn-action icon-btn ${stateClass}"
                     onclick="agregarProductoAlCarrito(this, '${this.id}')"
@@ -65,6 +77,9 @@ export class ShoppingCard {
                     <span class="material-symbols-outlined bookmark-add" aria-hidden="true">add_shopping_cart</span>
                     <span class="material-symbols-outlined bookmark" aria-hidden="true">shopping_cart</span>
                 </button>`;
+            */
+
+            return button.outerHTML;
         }
     
         return `<button class="icon-btn"></button>`;
