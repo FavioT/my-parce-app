@@ -1,5 +1,6 @@
 import { Component } from './component';
 import { PAGE_NAME } from '../utils/helpers';
+import '../../css/layout/mobile-navbar.css';
 
 // Simple Builder Design Pattern
 export class HeaderBuilder extends Component {
@@ -30,6 +31,49 @@ export class HeaderBuilder extends Component {
         $navbar.append(list);
         this.element.append($navbar);
 
+        return this;
+    }
+
+    createMobileNavBar(navbarItems) {
+        const $navbar = document.createElement('navbar');
+        $navbar.classList.add('mobile-nav');
+        $navbar.setAttribute('aria-label', 'primary');
+        $navbar.setAttribute('data-navbar-mobile', '');
+        $navbar.setAttribute('data-item-active', 'Inicio');
+
+        const list = document.createElement('ul');
+        list.className = 'nav-list';
+        navbarItems.forEach(({ label, link, icon }) => {
+            const li = document.createElement('li');
+            li.classList.add('nav-item');
+
+            const anchor = document.createElement('a');
+            anchor.classList.add('nav-link');
+            anchor.setAttribute('aria-current', 'true');
+            anchor.setAttribute('href', link);
+
+            const iconContainer = document.createElement('span');
+            iconContainer.classList.add('item-icon');
+
+            const iconItem = document.createElement('span');
+            iconItem.classList.add('material-symbols-outlined');
+            iconItem.setAttribute('aria-hidden', 'true');
+            iconItem.textContent = icon;
+
+            const iconLabel = document.createElement('span');
+            iconLabel.classList.add('label-medium');
+            iconLabel.textContent = label;
+
+            iconContainer.append(iconItem);
+            anchor.append(iconContainer);
+            anchor.append(iconLabel);
+
+            li.append(anchor);
+            list.append(li);
+        });
+
+        $navbar.append(list);
+        document.body.append($navbar);
         return this;
     }
 

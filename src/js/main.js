@@ -15,21 +15,25 @@ const navbarItems = [
     {
         label: 'Inicio',
         link: '/',
+        icon: 'home',
         show: true,
     },
     {
         label: 'Productos',
         link: './productos.html',
+        icon: 'inventory_2',
         show: true,
     },
     {
         label: 'Contacto',
         link: './contacto.html',
+        icon: 'shopping_cart',
         show: true,
     },
     {
         label: 'Novedades',
         link: './blog.html',
+        icon: 'campaign',
         show: true,
     }
 ];
@@ -38,7 +42,7 @@ const navbarItems = [
 // ToDo: Implentar patrón de diseño observer
 document.addEventListener("DOMContentLoaded", () => {
     const header = new HeaderBuilder('[data-header]');
-    header.setLogo().createNavbar(navbarItems).addShoppingCartButton();
+    header.setLogo().createNavbar(navbarItems).createMobileNavBar(navbarItems).addShoppingCartButton();
 
     setSuperiorBanner();
 
