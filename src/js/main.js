@@ -35,6 +35,7 @@ const navbarItems = [
 ];
 
 // ToDo: Refactorizar creación de banners, ver que patrón se puede aplicar para no repetir código.
+// ToDo: Implentar patrón de diseño observer
 document.addEventListener("DOMContentLoaded", () => {
     const header = new HeaderBuilder('[data-header]');
     header.setLogo().createNavbar(navbarItems).addShoppingCartButton();

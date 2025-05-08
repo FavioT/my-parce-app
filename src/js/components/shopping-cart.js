@@ -34,8 +34,9 @@ export class ShoppingCart {
         this.updateBadgeCounter();
     }   
 
-    removeItem(itemId) {
-        this.items = this.items.filter(item => item.id !== itemId);
+    removeItem(productId) {
+        this.items = this.items.filter(item => item.id !== productId);
+        this.storage.removeItem(`product-${productId}`);
         this.updateBadgeCounter();
     }
 
@@ -50,12 +51,16 @@ export class ShoppingCart {
     getItems() {
         return this.items;
     }
+
+    getItem(productId) {
+        return this.items.find(item => item.id === productId);
+    }
 }
 
 // Example usage
-const cart = ShoppingCart.getInstance();
-cart.addItem({ id: 1, name: 'Apple', price: 0.5, quantity: 3 });
-cart.addItem({ id: 2, name: 'Banana', price: 0.3, quantity: 5 });
+// const cart = ShoppingCart.getInstance();
+// cart.addItem({ id: 1, name: 'Apple', price: 0.5, quantity: 3 });
+// cart.addItem({ id: 2, name: 'Banana', price: 0.3, quantity: 5 });
 // console.log(cart.getItems());
 // console.log('Total Price:', cart.getTotalPrice());
 // cart.removeItem(1);

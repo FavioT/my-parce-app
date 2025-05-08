@@ -82,8 +82,16 @@ export class MaximumCard {
     }
 
     // ToDo: Mover implementación
-    getProductInfo(productId) {
-        const apiService = new ApiService(`${BASE_API_URL}/products/${productId}`);
+    getProductInfo(element) {
+        const storedProduct = this.shoppingCart.getItem(Number(this.id));
+        if (storedProduct) {
+            this.shoppingCart.removeItem(storedProduct.id);
+            element.classList.toggle('saved');
+            element.classList.toggle('removed');
+            return;
+        }
+
+        const apiService = new ApiService(`${BASE_API_URL}/products/${this.id}`);
         apiService.fetchData([], (response) => {
             const productData = { amount : 1, ...response.data };
 
@@ -92,10 +100,9 @@ export class MaximumCard {
             }
 
             this.shoppingCart.addItem(productData);
+            element.classList.toggle('removed');
+            element.classList.toggle('saved');
 
-            
-            // element.classList.toggle('removed');
-            // element.classList.toggle('saved');
             // showSnackbarNotification('Producto agregado al carrito');
 
             //if (cartSidebarPanel) {
@@ -108,7 +115,6 @@ export class MaximumCard {
                 // }
             // }
 
-            // updateCartCounterBudget();
             // updateTotalInCart();
             // updateWhatsappBtn();
         });
@@ -130,12 +136,7 @@ export class MaximumCard {
             button.setAttribute('aria-label', label);
             button.setAttribute('data-producto-id', this.id);
 
-            button.addEventListener('click', (event) => {
-                const productId = event.currentTarget.getAttribute('data-producto-id');
-                if (productId) {
-                    this.getProductInfo(productId);
-                }
-            });
+            button.addEventListener('click', (event) => this.getProductInfo(event.currentTarget));
 
             button.innerHTML = `
                 <span class="material-symbols-outlined bookmark-add" aria-hidden="true">add_shopping_cart</span>
