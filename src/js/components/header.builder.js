@@ -1,14 +1,17 @@
 import { Component } from './component';
 import { PAGE_NAME } from '../utils/helpers';
 import '../../css/layout/mobile-navbar.css';
+import ShoppingCart from './shopping-cart.singleton';
 
 // Simple Builder Design Pattern
 export class HeaderBuilder extends Component {
-    constructor(selector) {
+    constructor(selector, navbarItems) {
         super(selector);
+        this.navbarItems = navbarItems;
+        this.shoppingCart = new ShoppingCart();
     }
     
-    createNavbar(navbarItems) {
+    createNavbar() {
         let $navbar = document.createElement('navbar');
         $navbar.className = 'navbar';
         $navbar.setAttribute('data-navbar-desktop', '');
@@ -16,7 +19,7 @@ export class HeaderBuilder extends Component {
 
         let list = document.createElement('ul');
         list.className = 'navbar-list';
-        navbarItems.forEach(({ label, link, show }) => {
+        this.navbarItems.forEach(({ label, link, show }) => {
             let li = document.createElement('li');
             li.setAttribute('data-navbar-link', '');
 
@@ -34,8 +37,8 @@ export class HeaderBuilder extends Component {
         return this;
     }
 
-    createMobileNavBar(navbarItems) {
-        const $navbar = document.createElement('navbar');
+    createMobileNavBar() {
+        const $navbar = document.createElement('nav');
         $navbar.classList.add('mobile-nav');
         $navbar.setAttribute('aria-label', 'primary');
         $navbar.setAttribute('data-navbar-mobile', '');
@@ -43,7 +46,7 @@ export class HeaderBuilder extends Component {
 
         const list = document.createElement('ul');
         list.className = 'nav-list';
-        navbarItems.forEach(({ label, link, icon }) => {
+        this.navbarItems.forEach(({ label, link, icon }) => {
             const li = document.createElement('li');
             li.classList.add('nav-item');
 
@@ -73,7 +76,8 @@ export class HeaderBuilder extends Component {
         });
 
         $navbar.append(list);
-        document.body.append($navbar);
+        document.querySelector('main').insertAdjacentElement('beforebegin', $navbar);
+
         return this;
     }
 
@@ -102,27 +106,7 @@ export class HeaderBuilder extends Component {
     }
 
     addShoppingCartButton() {
-        let button = document.createElement('button');
-        button.className = 'icon-btn mis-a has-state';
-        button.ariaPressed = 'false';
-        button.ariaLabel = 'Mostrar el contenido del carrito';
-        button.setAttribute('data-cart-panel-btn', '');
-        button.setAttribute('data-side-bar-toggler', '');
-        button.setAttribute('data-target', 'cart-panel-sidebar');
-
-        let icon = document.createElement('span');
-        icon.className = 'material-symbols-outlined';
-        icon.ariaHidden = 'true';
-        icon.textContent = 'shopping_cart';
-
-        let badge = document.createElement('span');
-        badge.className = 'btn-badge';
-        badge.setAttribute('data-cart-counter-budget', '');
-        badge.style.display = 'none';
-
-        button.append(icon);
-        button.append(badge);
-
+        const button = this.shoppingCart.createHeaderButton();
         this.element.append(button);
 
         return this;

@@ -2,17 +2,15 @@ import { LocalStorageManager } from '../services/local-storage-manager';
 import { CLIENT_DOMAIN } from '../utils/helpers';
 
 // Singleton Desing Pattern for Shopping Cart
-export class ShoppingCart {
+class ShoppingCart {
     constructor() {
         this.items = [];
         this.storage = new LocalStorageManager(CLIENT_DOMAIN);
-    }
-
-    static getInstance() {
-        if (!ShoppingCart.instance) {
-            ShoppingCart.instance = new ShoppingCart();
+        if (ShoppingCart.instance) {
+            return ShoppingCart.instance;
         }
-        return ShoppingCart.instance;
+        this.data = "Soy único";
+        ShoppingCart.instance = this;
     }
 
     updateBadgeCounter() {
@@ -55,7 +53,33 @@ export class ShoppingCart {
     getItem(productId) {
         return this.items.find(item => item.id === productId);
     }
+
+    createHeaderButton() {
+        const button = document.createElement('button');
+        button.className = 'icon-btn mis-a has-state';
+        button.ariaPressed = 'false';
+        button.ariaLabel = 'Mostrar el contenido del carrito';
+        button.setAttribute('data-side-bar-toggler', '');
+        button.setAttribute('data-target', 'cart-panel-sidebar');
+
+        const icon = document.createElement('span');
+        icon.className = 'material-symbols-outlined';
+        icon.ariaHidden = 'true';
+        icon.textContent = 'shopping_cart';
+
+        const badge = document.createElement('span');
+        badge.className = 'btn-badge';
+        badge.setAttribute('data-cart-counter-budget', '');
+        badge.style.display = 'none';
+
+        button.append(icon);
+        button.append(badge);
+
+        return button;
+    }
 }
+
+export default ShoppingCart;
 
 // Example usage
 // const cart = ShoppingCart.getInstance();

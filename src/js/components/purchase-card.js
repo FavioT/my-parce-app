@@ -1,17 +1,14 @@
-import { ShoppingCart } from './shopping-cart';
+import ShoppingCart from './shopping-cart.singleton';
 import { LocalStorageManager } from '../services/local-storage-manager';
 import { CLIENT_DOMAIN } from '../utils/helpers';
 import { ApiService } from '../services/apiService';
 import { BASE_API_URL } from '../utils/helpers';
 
-const shoppingCart = ShoppingCart.getInstance();
-console.log(shoppingCart.getItems());
-
 // ToDo: Crear clase base para reutilizar métodos
 // ToDo: Renombrar métodos
 // ToDo: Ver si es realmente necesario guardar todo el objecto de producto en el localStorage o solo el id y la cantidad
 // ToDo: Delegar responsabilidad de agregar items al carrito
-export class MaximumCard {
+export class PurchaseCard {
     constructor(data) {
         this.productStockQty = data.qty ?? 0;
         this.productPrice = data.formatted_price ?? 0.00;
@@ -23,7 +20,7 @@ export class MaximumCard {
         this.imageUrl = data.image_url;
         this.isNew = Boolean(data.isNew);
         this.isPremium = Boolean(data.isPremium);
-        this.shoppingCart = ShoppingCart.getInstance();
+        this.shoppingCart = new ShoppingCart();
         this.storage = new LocalStorageManager(CLIENT_DOMAIN);
     }
 

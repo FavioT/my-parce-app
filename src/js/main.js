@@ -9,7 +9,6 @@ import { SearchInput } from './utils/searchInput';
 import { Carousel } from './components/carousel';
 import { HomeLatestGridFactory } from './components/home-latest-grid.factory';
 import { Footer } from './components/footer';
-import './components/shopping-cart';
 
 const navbarItems = [
     {
@@ -41,7 +40,7 @@ const navbarItems = [
 // ToDo: Refactorizar creación de banners, ver que patrón se puede aplicar para no repetir código.
 // ToDo: Implentar patrón de diseño observer
 document.addEventListener("DOMContentLoaded", () => {
-    const header = new HeaderBuilder('[data-header]');
+    const header = new HeaderBuilder('[data-header]', navbarItems);
     header.setLogo().createNavbar(navbarItems).createMobileNavBar(navbarItems).addShoppingCartButton();
 
     setSuperiorBanner();

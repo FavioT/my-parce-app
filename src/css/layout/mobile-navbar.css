@@ -46,3 +46,9 @@
 .mobile-nav .nav-link[aria-current="true"] .material-symbols-outlined {
     font-variation-settings: 'FILL' 1;
 }
+
+@media (min-width: 768px) {
+    .mobile-nav {
+        display: none;
+    }
+}
