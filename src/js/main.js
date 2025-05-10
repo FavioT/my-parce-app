@@ -4,11 +4,14 @@ import {
     setSuperiorBanner,
     setVideoBanner,
     setInferiorBanner,
+    createOverlay,
 } from './utils/helpers';
 import { SearchInput } from './utils/searchInput';
 import { Carousel } from './components/carousel';
 import { HomeLatestGridFactory } from './components/home-latest-grid.factory';
 import { Footer } from './components/footer';
+import { SidebarFactory } from './components/sidebar.factory';
+import '../css/layout/overlay.css';
 
 const navbarItems = [
     {
@@ -66,4 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const footer = new Footer();
     footer.render(document.body);
+
+    createOverlay();
+
+    const shoppingCartSidebar = SidebarFactory.create('cart-panel-sidebar', 'cart');
 });

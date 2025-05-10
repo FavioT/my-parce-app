@@ -6,6 +6,8 @@ class ShoppingCart {
     constructor() {
         this.items = [];
         this.storage = new LocalStorageManager(CLIENT_DOMAIN);
+        this.overlay = document.querySelector('[data-overlay]');
+
         if (ShoppingCart.instance) {
             return ShoppingCart.instance;
         }
@@ -54,6 +56,15 @@ class ShoppingCart {
         return this.items.find(item => item.id === productId);
     }
 
+    openShoppingCartPanel(event) {
+        const { target } = event.target.dataset;
+        const $sidebarPanel = document.querySelector(`#${target}`);
+        
+        if ($sidebarPanel) {
+            $sidebarPanel.classList.toggle('active');
+        }
+    }
+
     createHeaderButton() {
         const button = document.createElement('button');
         button.className = 'icon-btn mis-a has-state';
@@ -61,6 +72,7 @@ class ShoppingCart {
         button.ariaLabel = 'Mostrar el contenido del carrito';
         button.setAttribute('data-side-bar-toggler', '');
         button.setAttribute('data-target', 'cart-panel-sidebar');
+        button.addEventListener('click', (event) => this.openShoppingCartPanel(event));
 
         const icon = document.createElement('span');
         icon.className = 'material-symbols-outlined';

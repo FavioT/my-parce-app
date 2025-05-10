@@ -6,6 +6,7 @@ export const BASE_API_URL = 'http://127.0.0.1:8000/api/v1';
 
 export const CLIENT_DOMAIN = 'herrajesoeste.com';
 
+// ToDo: Juntar metodo de banner y videos [1]
 export const setSuperiorBanner = () => {
     const imageUrl = new URL(
         './../../assets/images/superior-banner-image.webp',
@@ -20,6 +21,7 @@ export const setSuperiorBanner = () => {
     $superiorBanner.append(container);
 };
 
+// ToDo: Juntar metodo de banner y videos [2]
 export const setVideoBanner = () => {
     const videoUrl = new URL(
         './../../assets/media/home-banner.mp4',
@@ -47,6 +49,7 @@ export const setVideoBanner = () => {
     $videoBanner.append(container);
 };
 
+// ToDo: Juntar metodo de banner y videos [3]
 export const setInferiorBanner = () => {
     const imageUrl = new URL(
         './../../assets/images/inferior-banner-image.webp',
@@ -72,3 +75,14 @@ export const homeCatalogTemplate = ({ id, name, slug, icon, type, capitalized_na
         </div>
     </li>
 `;
+
+export const createOverlay = () => {
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    overlay.setAttribute('data-overlay', '');
+
+    const $mobileNav = document.querySelector('[data-navbar-mobile]');
+    $mobileNav.insertAdjacentElement('beforebegin', overlay);
+
+    return overlay;
+};
