@@ -3,6 +3,50 @@
 | CART SIDEBAR
 |--------------------------------------------------------------------------
 */
+.side-bar-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    padding-block-end: 16px;
+}
+
+.side-bar-total,
+.side-bar-actions {
+    gap: 12px;
+    padding: 24px;
+}
+
+.side-bar-total {
+    display: none;
+}
+
+.side-bar-total.active {
+    display: flex;
+}
+
+.side-bar-actions {
+    display: flex;
+    border-block-start: 1px solid var(--outline);
+}
+
+.side-bar-total .cart-total,
+.side-bar-actions .btn {
+    max-width: 100%;
+    width: 100%;
+}
+
+.side-bar-total .total {
+    display: flex;
+    gap: 4px;
+}
+.side-bar-total .span {
+    text-align: center;
+}
+
+.side-bar-content::-webkit-scrollbar {
+    display: none;
+}
 
 .side-bar-content .product-showcase {
     padding: 16px;
@@ -112,4 +156,44 @@
 
 [data-cart-total-benefits-content] .cart-total-price.benefit b {
     text-transform: uppercase;
+}
+
+.filter-bar,
+.right-side-bar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    background-color: var(--background);
+    max-width: 400px;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    visibility: hidden;
+    transition: var(--transition-short);
+    z-index: 6;
+}
+
+.right-side-bar.active {
+    visibility: visible;
+    transform: translateX(-400px);
+    transition: var(--transition-medium);
+}
+
+.right-side-bar .title-wrapper {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.right-side-bar .title-wrapper .title-medium {
+    margin-inline-end: auto;
+}
+
+.right-side-bar .close-btn {
+    background-color: transparent;
+    margin: -8px;
 }

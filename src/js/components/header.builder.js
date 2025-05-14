@@ -5,9 +5,10 @@ import ShoppingCart from './shopping-cart.singleton';
 
 // Simple Builder Design Pattern
 export class HeaderBuilder extends Component {
-    constructor(selector, navbarItems) {
+    constructor(selector, navbarItems, location) {
         super(selector);
         this.navbarItems = navbarItems;
+        this.location = `.${location}`;
         this.shoppingCart = new ShoppingCart();
     }
     
@@ -25,7 +26,7 @@ export class HeaderBuilder extends Component {
 
             let anchor = document.createElement('a');
             anchor.href = link;
-            anchor.className = 'navbar-link title-small has-state';
+            anchor.className = `navbar-link title-small has-state ${ link.includes(this.location) ? 'active' : '' }`;
             anchor.textContent = label;
             li.append(anchor);
             list.append(li);

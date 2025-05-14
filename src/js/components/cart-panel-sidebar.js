@@ -1,21 +1,29 @@
 import { SidebarPanel } from './sidebar-panel';
+import '../../css/layout/sidebar.css';
 
 export class CartPanelSidebar extends SidebarPanel {
     createHTML() {
-      const panel = super.createHTML();
+      const panel = super.createHTML('shopping_cart', 'Carrito');
       panel.setAttribute('data-cart-side-bar', '');
   
+      console.log(this.storage.getAllItems());
+
       const extraHTML = `
-        <div class="side-bar-content" data-cart-content=""></div>
-        <div class="side-bar-total">
-          <span class="cart-total">Total:</span>
-          <span class="cart-total-price" data-cart-total-price>$ 0,00</span>
+        <div class="side-bar-content" data-cart-content>
+          <div class="product-showcase">
+            <h3 class="showcase-heading">El carrito de compras está vacío</h3>
+          </div>
         </div>
         <div class="side-bar-actions">
-          <button class="btn clear-btn" data-cart-content-clear>Limpiar</button>
+          <button class="btn btn-secondary label-large has-state" data-cart-content-clear disabled style="cursor: not-allowed;">
+            Limpiar
+          </button>
+          <button class="btn btn-ws label-large has-state" data-side-bar-toggler data-cart-confirm data-target="cart-panel-sidebar" disabled style="cursor: not-allowed;">
+            Confirmar Pedido
+          </button>
         </div>
       `;
-      panel.querySelector('.side-bar-content').insertAdjacentHTML('afterend', extraHTML);
+      panel.querySelector('.title-wrapper').insertAdjacentHTML('afterend', extraHTML);
   
       return panel;
     }

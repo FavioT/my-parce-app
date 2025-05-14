@@ -77,3 +77,59 @@
     background-color: var(--background);
     border-radius: var(--radius-circle);
 }
+
+.social-btn {
+    position: fixed;
+    right: 16px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: 64px;
+    max-width: 100%;
+    padding: 4px;
+    background-color: var(--white);
+    border-radius: var(--radius-circle);
+    box-shadow: var(--shadow-2);
+}
+
+.social-btn img {
+    max-width: 100%;
+}
+
+.whatsapp-btn {
+    bottom: 378px;
+}
+
+.instagram-btn {
+    bottom: 300px;
+}
+
+.facebook-btn {
+    bottom: 222px;
+}
+
+.tiktok-btn {
+    bottom: 144px;
+}
+
+@media (min-width: 768px) {
+    .social-btn img {
+        max-width: 100%;
+    }
+
+    .whatsapp-btn {
+        bottom: 330px;
+    }
+
+    .instagram-btn {
+        bottom: 252px;
+    }
+
+    .facebook-btn {
+        bottom: 174px;
+    }
+
+    .tiktok-btn {
+        bottom: 96px;
+    }
+}

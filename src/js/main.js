@@ -5,6 +5,8 @@ import {
     setVideoBanner,
     setInferiorBanner,
     createOverlay,
+    PAGE_NAME,
+    createSocialMediaIcons,
 } from './utils/helpers';
 import { SearchInput } from './utils/searchInput';
 import { Carousel } from './components/carousel';
@@ -42,8 +44,10 @@ const navbarItems = [
 
 // ToDo: Refactorizar creación de banners, ver que patrón se puede aplicar para no repetir código.
 // ToDo: Implentar patrón de diseño observer
+// ToDo: Quitar este listener para poder correr el proyecto en app de android
+// ToDo: Agregar meta tags
 document.addEventListener("DOMContentLoaded", () => {
-    const header = new HeaderBuilder('[data-header]', navbarItems);
+    const header = new HeaderBuilder('[data-header]', navbarItems, window.location.pathname);
     header.setLogo().createNavbar(navbarItems).createMobileNavBar(navbarItems).addShoppingCartButton();
 
     setSuperiorBanner();
@@ -60,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setVideoBanner();
 
-    const carousel = new Carousel('.brands-wrapper', '.carousel', { autoPlay: true, autoPlayInterval: 1500 });
+    new Carousel('.brands-wrapper', '.carousel', { autoPlay: true, autoPlayInterval: 1500 });
 
     const homeNews = factory.createGrid('latest-news');
     homeNews.loadItems();
@@ -71,6 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
     footer.render(document.body);
 
     createOverlay();
+    SidebarFactory.create('cart-panel-sidebar', 'cart');
 
-    const shoppingCartSidebar = SidebarFactory.create('cart-panel-sidebar', 'cart');
+    // Change document title
+    document.title = PAGE_NAME;
+
+    createSocialMediaIcons();
 });

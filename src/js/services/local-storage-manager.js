@@ -1,3 +1,4 @@
+// ToDo: Quizas haya que implementar un singleton
 export class LocalStorageManager {
     constructor(domain = 'example.com') {
         this.domain = domain; 
