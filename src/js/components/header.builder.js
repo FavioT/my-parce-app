@@ -8,8 +8,12 @@ export class HeaderBuilder extends Component {
     constructor(selector, navbarItems, location) {
         super(selector);
         this.navbarItems = navbarItems;
-        this.location = `.${location}`;
+        this.location = location;
         this.shoppingCart = new ShoppingCart();
+    }
+
+    getLinkActive(link) {
+       return link === this.location;
     }
     
     createNavbar() {
@@ -26,7 +30,7 @@ export class HeaderBuilder extends Component {
 
             let anchor = document.createElement('a');
             anchor.href = link;
-            anchor.className = `navbar-link title-small has-state ${ link.includes(this.location) ? 'active' : '' }`;
+            anchor.className = `navbar-link title-small has-state ${ this.getLinkActive(link) ? 'active' : '' }`;
             anchor.textContent = label;
             li.append(anchor);
             list.append(li);
@@ -53,7 +57,7 @@ export class HeaderBuilder extends Component {
 
             const anchor = document.createElement('a');
             anchor.classList.add('nav-link');
-            anchor.setAttribute('aria-current', 'true');
+            anchor.setAttribute('aria-current', this.getLinkActive(link));
             anchor.setAttribute('href', link);
 
             const iconContainer = document.createElement('span');

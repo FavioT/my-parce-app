@@ -24,19 +24,19 @@ const navbarItems = [
     },
     {
         label: 'Productos',
-        link: './productos.html',
+        link: '/productos.html',
         icon: 'inventory_2',
         show: true,
     },
     {
         label: 'Contacto',
-        link: './contacto.html',
+        link: '/contacto.html',
         icon: 'shopping_cart',
         show: true,
     },
     {
         label: 'Novedades',
-        link: './blog.html',
+        link: '/blog.html',
         icon: 'campaign',
         show: true,
     }

@@ -51,21 +51,19 @@ export class LocalStorageManager {
 }
 
 // Ejemplo de uso:
-const storage = new LocalStorageManager('herrajesoeste');
+// const storage = new LocalStorageManager('herrajesoeste');
 
 // Agregar un producto
-storage.addItem('product-123', { id: 123, name: 'Producto A', price: 100 });
+// storage.addItem('product-123', { id: 123, name: 'Producto A', price: 100 });
 
 // Obtener un producto
-const product = storage.getItem('product-123');
-console.log(product);
+// const product = storage.getItem('product-123');
 
 // Remover un producto
-storage.removeItem('product-123');
+// storage.removeItem('product-123');
 
 // Obtener todos los productos
-const allProducts = storage.getAllItems();
-console.log(allProducts);
+// const allProducts = storage.getAllItems();
 
 // Limpiar todos los productos del namespace
-storage.clearNamespace();
+// storage.clearNamespace();
