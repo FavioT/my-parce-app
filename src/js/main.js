@@ -1,3 +1,4 @@
+// Javascript
 import { HeaderBuilder } from './components/header.builder';
 import { HomeCatalogBuilder } from './components/home-catalog.builder';
 import { 
@@ -13,6 +14,7 @@ import { Carousel } from './components/carousel';
 import { HomeLatestGridFactory } from './components/home-latest-grid.factory';
 import { Footer } from './components/footer';
 import { SidebarFactory } from './components/sidebar.factory';
+// CSS
 import '../css/layout/overlay.css';
 
 const navbarItems = [
@@ -24,7 +26,7 @@ const navbarItems = [
     },
     {
         label: 'Productos',
-        link: '/productos.html',
+        link: new URL('../productos.html', import.meta.url).href,
         icon: 'inventory_2',
         show: true,
     },
