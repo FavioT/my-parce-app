@@ -1,9 +1,10 @@
 import { LocalStorageManager } from '../services/local-storage-manager';
 import { CLIENT_DOMAIN } from '../utils/helpers';
 
-// Singleton Desing Pattern for Shopping Cart
+// Singleton y Observer Design Pattern for Shopping Cart
 class ShoppingCart {
     constructor() {
+        this.observers = [];
         this.items = [];
         this.storage = new LocalStorageManager(CLIENT_DOMAIN);
         this.overlay = document.querySelector('[data-overlay]');
@@ -13,6 +14,18 @@ class ShoppingCart {
         }
         this.data = "Soy único";
         ShoppingCart.instance = this;
+    }
+
+    subscribe(observer) {
+        this.observers.push(observer);
+    }
+
+    unsubscribe(observer) {
+        this.observers = this.observers.filter(obs => obs !== observer);
+    }
+
+    notify() {
+        this.observers.forEach(observer => observer.update(this.items));
     }
 
     updateBadgeCounter() {
@@ -32,12 +45,14 @@ class ShoppingCart {
         this.storage.addItem(`product-${productData.id}`, productData);
         this.items.push(productData);
         this.updateBadgeCounter();
+        this.notify();
     }   
 
     removeItem(productId) {
         this.items = this.items.filter(item => item.id !== productId);
         this.storage.removeItem(`product-${productId}`);
         this.updateBadgeCounter();
+        this.notify();
     }
 
     getTotalPrice() {
@@ -46,6 +61,8 @@ class ShoppingCart {
 
     clearCart() {
         this.items = [];
+        this.updateBadgeCounter();
+        this.notify();
     }
 
     getItems() {
