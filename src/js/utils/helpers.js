@@ -29,64 +29,6 @@ export const SOCIAL_MEDIA_ICONS = [
     }
 ];
 
-// ToDo: Juntar metodo de banner y videos [1]
-export const setSuperiorBanner = () => {
-    const imageUrl = new URL(
-        './../../assets/images/superior-banner-image.webp',
-        import.meta.url
-    );
-
-    const container = document.createElement('div');
-    container.classList.add('img-container');
-    container.style.backgroundImage = `url(${imageUrl.pathname})`;
-
-    const $superiorBanner = document.querySelector('[data-main-banner-superior]');
-    $superiorBanner.append(container);
-};
-
-// ToDo: Juntar metodo de banner y videos [2]
-export const setVideoBanner = () => {
-    const videoUrl = new URL(
-        './../../assets/media/home-banner.mp4',
-        import.meta.url
-    );
-
-    const container = document.createElement('div');
-    container.classList.add('video-container');
-    
-    const video = document.createElement('video');
-    video.classList.add('video-bg');
-    video.autoplay = true;
-    video.loop = true;
-    video.muted = true;
-
-    const source = document.createElement('source');
-    source.src = videoUrl;
-    source.type = 'video/mp4';
-    source.textContent = 'Your browser does not support the video tag.';
-
-    video.append(source);
-    container.append(video);
-
-    const $videoBanner = document.querySelector('[data-video-banner]');
-    $videoBanner.append(container);
-};
-
-// ToDo: Juntar metodo de banner y videos [3]
-export const setInferiorBanner = () => {
-    const imageUrl = new URL(
-        './../../assets/images/inferior-banner-image.webp',
-        import.meta.url
-    );
-
-    const container = document.createElement('div');
-    container.classList.add('img-container');
-    container.style.backgroundImage = `url(${imageUrl.pathname})`;
-
-    const $inferiorBanner = document.querySelector('[data-main-banner-inferior]');
-    $inferiorBanner.append(container);
-};
-
 // ToDo: Quitar esto de alguna manera.
 export const homeCatalogTemplate = ({ id, name, slug, icon, type, capitalized_name, icon_url }) => `
     <li>

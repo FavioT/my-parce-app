@@ -2,12 +2,13 @@ import { Component } from './component';
 import { PAGE_NAME } from '../utils/helpers';
 import '../../css/layout/mobile-navbar.css';
 import ShoppingCart from './shopping-cart.singleton';
+import { NAVBAR_ITEMS } from '../utils/constants';
 
 // Simple Builder Design Pattern
 export class HeaderBuilder extends Component {
-    constructor(selector, navbarItems, location) {
+    constructor(selector, location) {
         super(selector);
-        this.navbarItems = navbarItems;
+        this.navbarItems = NAVBAR_ITEMS;
         this.location = location;
         this.shoppingCart = new ShoppingCart();
     }
