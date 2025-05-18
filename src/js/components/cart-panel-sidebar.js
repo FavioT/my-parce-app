@@ -14,8 +14,6 @@ export class CartPanelSidebar extends SidebarPanel {
     const panel = super.createHTML('shopping_cart', 'Carrito');
     panel.setAttribute('data-cart-side-bar', '');
 
-    console.log(this.storage.getAllItems());
-
     const extraHTML = `
       <div class="side-bar-content" data-cart-content>
         <div class="product-showcase">

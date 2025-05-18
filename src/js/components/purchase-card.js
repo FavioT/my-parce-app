@@ -21,11 +21,7 @@ export class PurchaseCard {
         this.isNew = Boolean(data.isNew);
         this.isPremium = Boolean(data.isPremium);
         this.shoppingCart = new ShoppingCart();
-        this.storage = new LocalStorageManager(CLIENT_DOMAIN);
-    }
-
-    getProductInCart() {
-        return this.storage.getItem(`product-${this.id}`);
+        this.storage = new LocalStorageManager();
     }
 
     getPriceBox() {
@@ -117,6 +113,10 @@ export class PurchaseCard {
         });
     }
 
+    /*getProductInCart() {
+        return this.storage.getItem(`product-${this.id}`);
+    }*/
+
     getAddToCartButton() {
         const showcaseActions = document.createElement('div');
         showcaseActions.classList.add('showcase-actions');
@@ -125,7 +125,7 @@ export class PurchaseCard {
         button.classList.add('icon-btn');
 
         if (this.productStockQty > 0) {
-            const productInCart = this.getProductInCart();
+            const productInCart = this.storage.getItem(`product-${this.id}`);
             const stateClass = productInCart ? 'saved' : 'removed';
             const label = productInCart ? 'Eliminar del carrito' : 'Agregar al carrito';
 

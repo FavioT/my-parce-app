@@ -1,18 +1,17 @@
 import { LocalStorageManager } from '../services/local-storage-manager';
-import { CLIENT_DOMAIN } from '../utils/helpers';
 
 // Singleton y Observer Design Pattern for Shopping Cart
 class ShoppingCart {
     constructor() {
         this.observers = [];
-        this.items = [];
-        this.storage = new LocalStorageManager(CLIENT_DOMAIN);
+        this.storage = new LocalStorageManager();
+        this.items = Object.values(this.storage.getAllItems());
         this.overlay = document.querySelector('[data-overlay]');
+        this.updateBadgeCounter();
 
         if (ShoppingCart.instance) {
             return ShoppingCart.instance;
         }
-        this.data = "Soy único";
         ShoppingCart.instance = this;
     }
 

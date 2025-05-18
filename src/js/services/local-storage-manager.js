@@ -1,8 +1,10 @@
+import { CLIENT_DOMAIN } from "../utils/helpers";
+
 // ToDo: Quizas haya que implementar un singleton
 export class LocalStorageManager {
-    constructor(domain = 'example.com') {
-        this.domain = domain; 
-    }
+    domain = CLIENT_DOMAIN;
+
+    constructor() {}
 
     generateKey(key) {
         return `${this.domain}-${key}`;
@@ -33,8 +35,7 @@ export class LocalStorageManager {
         const items = {};
         Object.keys(window.localStorage).forEach(storageKey => {
             if (storageKey.startsWith(this.domain)) {
-                const key = storageKey.replace(`${this.domain}-`, '');
-                items[key] = JSON.parse(window.localStorage.getItem(storageKey));
+                items[storageKey] = JSON.parse(window.localStorage.getItem(storageKey));
             }
         });
         return items;
