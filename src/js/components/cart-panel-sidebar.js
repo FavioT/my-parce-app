@@ -7,6 +7,7 @@ export class CartPanelSidebar extends SidebarPanel {
     super(panelId);
     this.cart = new ShoppingCart();
     this.cart.subscribe(this);
+    this.cart.notify();
     this.content = null;    
   }
 
