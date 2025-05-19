@@ -23,6 +23,8 @@
 
 .side-bar-total.active {
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .side-bar-actions {
@@ -30,18 +32,9 @@
     border-block-start: 1px solid var(--outline);
 }
 
-.side-bar-total .cart-total,
 .side-bar-actions .btn {
     max-width: 100%;
     width: 100%;
-}
-
-.side-bar-total .total {
-    display: flex;
-    gap: 4px;
-}
-.side-bar-total .span {
-    text-align: center;
 }
 
 .side-bar-content::-webkit-scrollbar {
@@ -196,4 +189,24 @@
 .right-side-bar .close-btn {
     background-color: transparent;
     margin: -8px;
+}
+
+.product-amount.contact-input-field {
+    padding: 2px 4px;
+    margin: 0;
+    width: 65%;
+    text-align: center;
+    font-size: var(--fs-body-large);
+    font-weight: var(--weight-medium);
+}
+
+.contact-input-field {
+    background-color: var(--white-2);
+    color: hsl(0, 0%, 13%);
+    font-size: var(--fs-body-medium);
+    padding: 15px;
+    border-radius: var(--radius-4);
+    outline: 1px solid transparent;
+    outline-offset: 0;
+    margin-block-end: 15px;
 }

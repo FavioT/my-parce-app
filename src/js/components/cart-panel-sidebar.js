@@ -52,14 +52,38 @@ export class CartPanelSidebar extends SidebarPanel {
     }
     this.content.innerHTML = `
         <div class="product-showcase">
-            ${items.map(item => `
-                <div class="cart-item">
-                    <span>${item.name}</span>
-                    <span>${item.price} x ${item.quantity}</span>
+          <h3 class="showcase-heading">Productos</h3>
+          <div class="showcase-wrapper">
+            <div class="showcase-container">
+               ${items.map(item => `
+                <div class="showcase" data-product-id="cleanpet.com.ar-product-xxxx">
+                  <a href="/producto.html?id=XXXX" class="showcase-img-box">
+                    <img src="https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png" alt="TOR JAP 6 X 3/4 (X 100)" title="TOR JAP 6 X 3/4 (X 100)" width="75" height="75" loading="lazy" class="showcase-img">
+                  </a>
+                  <div class="showcase-content">
+                    <div class="detail-wrapper">
+                      <a href="/producto.html?id=7676" class="showcase-product-link">
+                          <h4 class="showcase-title">TOR JAP 6 X 3/4 (X 100)</h4>
+                      </a>
+                      <div class="product-price-wrapper">
+                          <span class="label-medium">15.665,87</span>
+                      </div>
+                      <div class="product-amount-wrapper">
+                          <span class="material-symbols-outlined" aria-hidden="true">orders</span>
+                          <input type="number" class="product-amount contact-input-field" id="product-amount-7676" data-producto-id="7676" value="1" oninput="validateNumberValueAllowed(this)" onchange="updateProductInCartAmount(this)">
+                      </div>
+                    </div>
+                    <button class="icon-btn has-state saved" onclick="removeProductFromCartPanel(this, 'cleanpet.com.ar-product-7676')" aria-label="Eliminar producto del carrito" data-saved-producto-id="7676">
+                      <span class="material-symbols-outlined bookmark" aria-hidden="true">delete</span>
+                    </button>
+                  </div>
                 </div>
             `).join('')}
+            </div>
+          </div>
         </div>
     `;
+    this.updateTotal(items);
   }
 
   initEvents() {
@@ -71,14 +95,48 @@ export class CartPanelSidebar extends SidebarPanel {
     }
   }
 
-  updateTotal(price) {
-    this.totalPriceEl.textContent = price;
+  updateTotal(items) {
+    if (!this.content) return;
+
+    const sidebarTotal = document.createElement('div');
+    sidebarTotal.classList.add('side-bar-total');
+    sidebarTotal.setAttribute('data-cart-total-content', '');
+
+    if (!items.length) {
+      sidebarTotal.classList.remove('active');
+      return;
+    }
+
+    const formatter = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+    let totalWithBenefits = 0;
+
+    let total = items.reduce((acc, product) => {
+      if (product.hasOwnProperty('intPremiumPrice') && product.intPremiumPrice > 0) {
+          totalWithBenefits += (product.amount * product.intPremiumPrice);
+      } else {
+          totalWithBenefits += product?.amount * product?.int_price;
+      }
+      return acc + (product?.amount * product?.int_price);
+    }, 0);
+
+    total = total / 100;
+    total = formatter.format(total);
+
+    const totalLabel = `
+      <span class="body-large span">Total:</span>
+      <span data-cart-total-price>$ ${total}</span>
+    `;
+
+    sidebarTotal.innerHTML = totalLabel
+    sidebarTotal.classList.add('active');
+
+    this.content.insertAdjacentElement('afterend', sidebarTotal);
   }
 
   clearCart() {
     const content = this.panel.querySelector('[data-cart-content]');
     content.innerHTML = '';
-    this.updateTotal('$ 0,00');
+    //this.updateTotal('$ 0,00');
   }
 }
   
