@@ -1,6 +1,7 @@
 import { SidebarPanel } from './sidebar-panel';
 import '../../css/layout/sidebar.css';
 import ShoppingCart from './shopping-cart.singleton';
+import { EventManager} from './../utils/eventmanager';
 
 export class CartPanelSidebar extends SidebarPanel {
   constructor(panelId) {
@@ -41,39 +42,52 @@ export class CartPanelSidebar extends SidebarPanel {
     if (!this.content) {
       this.content = this.panel?.querySelector?.('[data-cart-content]');
       if (!this.content) return;
-    } 
-    if (!items.length) {
-        this.content.innerHTML = `
-            <div class="product-showcase">
-                <h3 class="showcase-heading">El carrito de compras está vacío</h3>
-            </div>
-        `;
-        return;
     }
+
+    const $cartTotalContent = document.querySelector('[data-cart-total-content]');
+    if ($cartTotalContent) {
+      $cartTotalContent.remove();
+    }
+
+    if (!items.length) {
+      this.content.innerHTML = `
+        <div class="product-showcase">
+          <h3 class="showcase-heading">El carrito de compras está vacío</h3>
+        </div>
+      `;
+      return;
+    }
+
+    // Se borran los items
+    const $productIds = document.querySelectorAll('[data-product-id]')
+    if ($productIds) {
+      $productIds.forEach(item => item.remove());
+    }
+
     this.content.innerHTML = `
         <div class="product-showcase">
           <h3 class="showcase-heading">Productos</h3>
           <div class="showcase-wrapper">
             <div class="showcase-container">
-               ${items.map(item => `
-                <div class="showcase" data-product-id="cleanpet.com.ar-product-xxxx">
-                  <a href="/producto.html?id=XXXX" class="showcase-img-box">
-                    <img src="https://admin.herrajesoeste.com/storage/products/media/ka7tJhwPNmZzGkZbqeElHLYnKQ.png" alt="TOR JAP 6 X 3/4 (X 100)" title="TOR JAP 6 X 3/4 (X 100)" width="75" height="75" loading="lazy" class="showcase-img">
+               ${items.map(({ id, image_url, name, formatted_price }) => `
+                <div class="showcase" data-product-id="${ this.storage.domain }-product-${ id }">
+                  <a href="/producto.html?id=${ id }" class="showcase-img-box">
+                    <img src="${ image_url }" alt="${ name }" title="${ name }" width="75" height="75" loading="lazy" class="showcase-img">
                   </a>
                   <div class="showcase-content">
                     <div class="detail-wrapper">
-                      <a href="/producto.html?id=7676" class="showcase-product-link">
-                          <h4 class="showcase-title">TOR JAP 6 X 3/4 (X 100)</h4>
+                      <a href="/producto.html?id=${ id }" class="showcase-product-link">
+                          <h4 class="showcase-title">${ name }</h4>
                       </a>
                       <div class="product-price-wrapper">
-                          <span class="label-medium">15.665,87</span>
+                          <span class="label-medium">${ formatted_price }</span>
                       </div>
                       <div class="product-amount-wrapper">
                           <span class="material-symbols-outlined" aria-hidden="true">orders</span>
-                          <input type="number" class="product-amount contact-input-field" id="product-amount-7676" data-producto-id="7676" value="1" oninput="validateNumberValueAllowed(this)" onchange="updateProductInCartAmount(this)">
+                          <input type="number" class="product-amount contact-input-field" id="product-amount-${ id }" data-producto-id="${ id }" value="1" oninput="validateNumberValueAllowed(this)" onchange="updateProductInCartAmount(this)">
                       </div>
                     </div>
-                    <button class="icon-btn has-state saved" onclick="removeProductFromCartPanel(this, 'cleanpet.com.ar-product-7676')" aria-label="Eliminar producto del carrito" data-saved-producto-id="7676">
+                    <button class="icon-btn has-state saved" aria-label="Eliminar producto del carrito" data-saved-producto-id="7676">
                       <span class="material-symbols-outlined bookmark" aria-hidden="true">delete</span>
                     </button>
                   </div>
@@ -83,20 +97,32 @@ export class CartPanelSidebar extends SidebarPanel {
           </div>
         </div>
     `;
-    this.updateTotal(items);
+
+    if (items.length > 0) {
+      this.updateTotal(items);
+    }
+    
+    EventManager.addEventOnElements(document.querySelectorAll('[data-saved-producto-id'), 'click', (event) => {
+      const { savedProductoId } = event.target.dataset;
+      this.cart.removeItem(Number(savedProductoId));
+    });
   }
 
   initEvents() {
     super.initEvents();
-    this.totalPriceEl = this.panel.querySelector('[data-cart-total-price]');
-    this.clearBtn = this.panel.querySelector('[data-cart-content-clear]');
-    if (this.clearBtn) {
-      this.clearBtn.addEventListener('click', () => this.clearCart());
-    }
+    //this.totalPriceEl = this.panel.querySelector('[data-cart-total-price]');
+    //this.clearBtn = this.panel.querySelector('[data-cart-content-clear]');
+    //if (this.clearBtn) {
+    //  this.clearBtn.addEventListener('click', () => this.clearCart());
+    //}
   }
 
   updateTotal(items) {
     if (!this.content) return;
+    const $cartTotalContent = document.querySelector('[data-cart-total-content]');
+    if ($cartTotalContent) {
+      $cartTotalContent.remove();
+    }
 
     const sidebarTotal = document.createElement('div');
     sidebarTotal.classList.add('side-bar-total');
