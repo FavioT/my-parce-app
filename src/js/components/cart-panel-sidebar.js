@@ -38,16 +38,13 @@ export class CartPanelSidebar extends SidebarPanel {
   }
 
   update(items) {
-    // Renderiza los productos en el panel
     if (!this.content) {
       this.content = this.panel?.querySelector?.('[data-cart-content]');
       if (!this.content) return;
     }
 
-    const $cartTotalContent = document.querySelector('[data-cart-total-content]');
-    if ($cartTotalContent) {
-      $cartTotalContent.remove();
-    }
+    // Limpia el contenido anterior
+    this.content.innerHTML = "";
 
     if (!items.length) {
       this.content.innerHTML = `
@@ -58,54 +55,128 @@ export class CartPanelSidebar extends SidebarPanel {
       return;
     }
 
-    // Se borran los items
-    const $productIds = document.querySelectorAll('[data-product-id]')
-    if ($productIds) {
-      $productIds.forEach(item => item.remove());
-    }
+    // Crea el contenedor principal
+    const showcaseDiv = document.createElement('div');
+    showcaseDiv.className = 'product-showcase';
 
-    this.content.innerHTML = `
-        <div class="product-showcase">
-          <h3 class="showcase-heading">Productos</h3>
-          <div class="showcase-wrapper">
-            <div class="showcase-container">
-               ${items.map(({ id, image_url, name, formatted_price }) => `
-                <div class="showcase" data-product-id="${ this.storage.domain }-product-${ id }">
-                  <a href="/producto.html?id=${ id }" class="showcase-img-box">
-                    <img src="${ image_url }" alt="${ name }" title="${ name }" width="75" height="75" loading="lazy" class="showcase-img">
-                  </a>
-                  <div class="showcase-content">
-                    <div class="detail-wrapper">
-                      <a href="/producto.html?id=${ id }" class="showcase-product-link">
-                          <h4 class="showcase-title">${ name }</h4>
-                      </a>
-                      <div class="product-price-wrapper">
-                          <span class="label-medium">${ formatted_price }</span>
-                      </div>
-                      <div class="product-amount-wrapper">
-                          <span class="material-symbols-outlined" aria-hidden="true">orders</span>
-                          <input type="number" class="product-amount contact-input-field" id="product-amount-${ id }" data-producto-id="${ id }" value="1" oninput="validateNumberValueAllowed(this)" onchange="updateProductInCartAmount(this)">
-                      </div>
-                    </div>
-                    <button class="icon-btn has-state saved" aria-label="Eliminar producto del carrito" data-saved-producto-id="7676">
-                      <span class="material-symbols-outlined bookmark" aria-hidden="true">delete</span>
-                    </button>
-                  </div>
-                </div>
-            `).join('')}
-            </div>
-          </div>
-        </div>
-    `;
+    const heading = document.createElement('h3');
+    heading.className = 'showcase-heading';
+    heading.textContent = 'Productos';
+    showcaseDiv.appendChild(heading);
 
-    if (items.length > 0) {
-      this.updateTotal(items);
-    }
-    
-    EventManager.addEventOnElements(document.querySelectorAll('[data-saved-producto-id'), 'click', (event) => {
-      const { savedProductoId } = event.target.dataset;
-      this.cart.removeItem(Number(savedProductoId));
+    const wrapper = document.createElement('div');
+    wrapper.className = 'showcase-wrapper';
+
+    const container = document.createElement('div');
+    container.className = 'showcase-container';
+
+    items.forEach(({ id, image_url, name, formatted_price }) => {
+      const showcase = document.createElement('div');
+      showcase.className = 'showcase';
+      showcase.dataset.productId = `${this.storage.domain}-product-${id}`;
+
+      // Imagen
+      const imgBox = document.createElement('a');
+      imgBox.href = `/producto.html?id=${id}`;
+      imgBox.className = 'showcase-img-box';
+      const img = document.createElement('img');
+      img.src = image_url;
+      img.alt = name;
+      img.title = name;
+      img.width = 75;
+      img.height = 75;
+      img.loading = 'lazy';
+      img.className = 'showcase-img';
+      imgBox.appendChild(img);
+
+      // Contenido
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'showcase-content';
+
+      // Detalles
+      const detailWrapper = document.createElement('div');
+      detailWrapper.className = 'detail-wrapper';
+
+      const productLink = document.createElement('a');
+      productLink.href = `/producto.html?id=${id}`;
+      productLink.className = 'showcase-product-link';
+      const title = document.createElement('h4');
+      title.className = 'showcase-title';
+      title.textContent = name;
+      productLink.appendChild(title);
+
+      const priceWrapper = document.createElement('div');
+      priceWrapper.className = 'product-price-wrapper';
+      const price = document.createElement('span');
+      price.className = 'label-medium';
+      price.textContent = `$ ${formatted_price}`;
+      priceWrapper.appendChild(price);
+
+      const amountWrapper = document.createElement('div');
+      amountWrapper.className = 'product-amount-wrapper';
+      const icon = document.createElement('span');
+      icon.className = 'material-symbols-outlined';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = 'orders';
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'product-amount contact-input-field';
+      input.id = `product-amount-${id}`;
+      input.dataset.productoId = id;
+      input.value = 1;
+      input.oninput = (event) => {
+        let { value, dataset } = event.currentTarget;
+
+        value = value.replace(/[^0-9]/g, '');
+        value = value.replace(/(\..*)\./g, '$1');
+
+        const productData = this.storage.getItem(`product-${dataset.productoId}`);
+        if (!productData) {
+          return;
+        }
+
+        const newValue = parseInt(value) || 1;
+        productData.amount = newValue > 1_000_000 ? 1_000_000 : newValue;
+        this.storage.addItem(`product-${dataset.productoId}`, productData);
+
+        this.updateTotal(items);
+      };
+
+      amountWrapper.appendChild(icon);
+      amountWrapper.appendChild(input);
+
+      detailWrapper.appendChild(productLink);
+      detailWrapper.appendChild(priceWrapper);
+      detailWrapper.appendChild(amountWrapper);
+
+      // Botón eliminar
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'icon-btn has-state saved';
+      deleteBtn.setAttribute('aria-label', 'Eliminar producto del carrito');
+      deleteBtn.dataset.savedProductoId = id;
+      deleteBtn.addEventListener('click', (event) => {
+        const { savedProductoId } = event.currentTarget.dataset;
+        this.cart.removeItem(Number(savedProductoId));
+      });
+
+      const deleteIcon = document.createElement('span');
+      deleteIcon.className = 'material-symbols-outlined bookmark';
+      deleteIcon.setAttribute('aria-hidden', 'true');
+      deleteIcon.textContent = 'delete';
+      deleteBtn.appendChild(deleteIcon);
+
+      contentDiv.appendChild(detailWrapper);
+      contentDiv.appendChild(deleteBtn);
+
+      showcase.appendChild(imgBox);
+      showcase.appendChild(contentDiv);
+
+      container.appendChild(showcase);
     });
+
+    wrapper.appendChild(container);
+    showcaseDiv.appendChild(wrapper);
+    this.content.appendChild(showcaseDiv);
   }
 
   initEvents() {
@@ -119,6 +190,7 @@ export class CartPanelSidebar extends SidebarPanel {
 
   updateTotal(items) {
     if (!this.content) return;
+    
     const $cartTotalContent = document.querySelector('[data-cart-total-content]');
     if ($cartTotalContent) {
       $cartTotalContent.remove();
